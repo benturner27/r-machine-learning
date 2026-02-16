@@ -72,3 +72,18 @@ library(gmodels)
 #Create CrossTable for cross-tabulating model prediction with labelled data
 CrossTable(x = wbcd_test_labels, y = wbcd_test_pred, prop.chisq = FALSE)
 
+#Improving prediction score
+
+#Standardising all numerical data of data frame with z-score standardisation
+#using scale function
+wbcd_z <- as.data.frame(scale(wbcd[-1]))
+summary(wbcd_z$area_mean)
+
+#Implement the standardised numerical data into modelling and evaluating
+wbcd_train <- wbcd_z[1:469, ]
+wbcd_test <- wbcd_z[470:569, ]
+wbcd_train_labels <- wbcd[1:469, 1]
+wbcd_test_labels <- wbcd[470:569, 1]
+wbcd_test_pred <- knn(train = wbcd_train, test = wbcd_test,
+                      cl = wbcd_train_labels, k = 21)
+CrossTable(x = wbcd_test_labels, y = wbcd_test_pred, prop.chisq = FALSE)
