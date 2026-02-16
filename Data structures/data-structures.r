@@ -251,8 +251,41 @@ table(usedcars$model)
 model_table <- table(usedcars$model)
 prop.table(model_table)
 
-#Creating a table of colour choices proportionally usind the prop.table function
+#Creating a table of colour choices proportionally using the prop.table function
 #Rounding the numbers to something more readable
 colour_table <- table(usedcars$color)
 colour_pct <- prop.table(colour_table) * 100
 round(colour_pct, digits = 1)
+
+#Scatterplot
+
+#Creating a scatterplot to analyse the relationship between car prices and its
+#mileage
+plot(x = usedcars$mileage, y = usedcars$price,
+     main = "Scatterplot of car prices vs mileage",
+     xlab = "Used car Odometer (mi.)",
+     ylab = "Used car price ($)")
+
+#Cross-tabulation
+
+#Calling installed library gmodels
+library(gmodels)
+
+#Creating a new variable based on colours that a considered to be a conservative
+#choice
+usedcars$conservative <- 
+  usedcars$color %in% c("Black", "Gray", "Silver", "White")
+
+#Showing conservative colour count using table function
+table(usedcars$conservative)
+
+#Using cross tabulation to show the relationship between conservative colours
+#and car models using the CrossTable function
+CrossTable(x = usedcars$model, y = usedcars$conservative)
+
+#Calculating relationship between the two variables using the pchisq function
+pchisq(0.154, df = 2, lower.tail = FALSE)
+
+#Alternative method for calculating chi-squared test, using pchisq parameter
+#inside CrossTable function
+CrossTable(x = usedcars$model, y = usedcars$conservative, chisq = TRUE)
