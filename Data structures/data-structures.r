@@ -229,3 +229,30 @@ hist(usedcars$price, main = "Histogram of used car prices",
      xlab = "Price ($)")
 hist(usedcars$mileage, main = "Histogram of used car mileage",
      xlab = "Odometer (mi.)")
+
+#Variance and standard deviation
+
+#Calculating variance and standard deviation of price and mileage variables
+#using var and sd functions
+var(usedcars$price)
+sd(usedcars$price)
+var(usedcars$mileage)
+sd(usedcars$mileage)
+
+#Categorical features
+
+#Creating a table showing all the years, colours and models listed in each
+#variable using the table function
+table(usedcars$year)
+table(usedcars$color)
+table(usedcars$model)
+
+#Creating a table of model types proportionally using the prop.table function
+model_table <- table(usedcars$model)
+prop.table(model_table)
+
+#Creating a table of colour choices proportionally usind the prop.table function
+#Rounding the numbers to something more readable
+colour_table <- table(usedcars$color)
+colour_pct <- prop.table(colour_table) * 100
+round(colour_pct, digits = 1)
