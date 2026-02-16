@@ -145,3 +145,27 @@ m4
 #Retrieving rows and columns from matrix
 m4[1, ]
 m4[, 1]
+
+#Managing and Saving Data
+
+#Using ls function to search for all objects in file
+ls()
+
+#Using rm function to remove objects not wanted for saving
+rm(m, m2, m3, m4, subject1)
+
+#Removing objects using the rm function and using ls as a list
+rm(list = ls())
+
+#Reading a csv file
+pt_data <- read.csv("pt_data.csv")
+
+#Reading a csv file, using generic header format in case csv has no headers
+pt_data <- read.csv("pt_data.csv", header = FALSE)
+
+#Reading a csv file, using stringsAsFactor parameter to convert
+#Character columns as factors
+pt_data <- read.csv("pt_data.csv", stringsAsFactors = TRUE)
+
+#writing a csv file, without using row names in file
+write.csv(pt_data, file = "pt_data.csv", row.names = FALSE)
