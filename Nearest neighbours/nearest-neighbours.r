@@ -55,15 +55,11 @@ wbcd_test <- wbcd_n[470:569, ]
 wbcd_train_labels <- wbcd[1:469, 1]
 wbcd_test_labels <- wbcd[470:569, 1]
 
+#Training model on data
 
+#loading library class
+library(class)
 
-
-
-
-
-
-
-
-
-
-
+#modelling training data using knn function
+wbcd_test_pred <- knn(train = wbcd_train, test = wbcd_test,
+                      cl = wbcd_train_labels, k = 21)
