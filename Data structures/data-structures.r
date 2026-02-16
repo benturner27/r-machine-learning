@@ -77,3 +77,11 @@ subject1$temperature
 #Retrieving multiple indexes in a list object
 subject1[c("temperature", "flu_status")]
 
+#Data Frames
+
+#Creating a data frame of all patient data
+pt_data <- data.frame(subject_name, temperature, flu_status, gender, blood,
+                      symptoms)
+
+#calling data frame
+pt_data
