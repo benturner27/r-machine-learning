@@ -80,10 +80,25 @@ wbcd_z <- as.data.frame(scale(wbcd[-1]))
 summary(wbcd_z$area_mean)
 
 #Implement the standardised numerical data into modelling and evaluating
-wbcd_train <- wbcd_z[1:469, ]
-wbcd_test <- wbcd_z[470:569, ]
+wbcd_train_z <- wbcd_z[1:469, ]
+wbcd_test_z <- wbcd_z[470:569, ]
 wbcd_train_labels <- wbcd[1:469, 1]
 wbcd_test_labels <- wbcd[470:569, 1]
 wbcd_test_pred <- knn(train = wbcd_train, test = wbcd_test,
                       cl = wbcd_train_labels, k = 21)
 CrossTable(x = wbcd_test_labels, y = wbcd_test_pred, prop.chisq = FALSE)
+
+#K score opimisation
+
+#Creating a for loop where the model loops different k numbers to find most
+#efficient model
+k_values <- c(1, 5, 11, 15, 21, 27)
+for (k_val in k_values) {
+  wbcd_test_pred <- knn(train = wbcd_train,
+                       test = wbcd_test,
+                       cl = wbcd_train_labels,
+                       k = k_val)
+  CrossTable(x = wbcd_test_labels,
+             y = wbcd_test_pred,
+             prop.chisq = FALSE)
+}
