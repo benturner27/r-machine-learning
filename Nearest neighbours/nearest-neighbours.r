@@ -63,3 +63,12 @@ library(class)
 #modelling training data using knn function
 wbcd_test_pred <- knn(train = wbcd_train, test = wbcd_test,
                       cl = wbcd_train_labels, k = 21)
+
+#Data evaluation
+
+#loading library gmodels
+library(gmodels)
+
+#Create CrossTable for cross-tabulating model prediction with labelled data
+CrossTable(x = wbcd_test_labels, y = wbcd_test_pred, prop.chisq = FALSE)
+
