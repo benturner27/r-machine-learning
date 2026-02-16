@@ -214,3 +214,18 @@ quantile(usedcars$price, probs = c(0.01, 0.99))
 #Obtaining custom quantile ranges using the quantile function
 quantile(usedcars$price, seq(from = 0, to = 1, by = 0.20))
 
+#Boxplots
+
+#Creating box plots of the price and mileage variables using boxplot function
+boxplot(usedcars$price, main = "Boxplot of used car prices",
+        ylab = "Price ($)")
+boxplot(usedcars$mileage, main = "Boxplot of used car milage",
+        ylab = "Odometer (mi.)")
+
+#Histograms
+
+#Creating histograms of the price and mileage variable used hist function
+hist(usedcars$price, main = "Histogram of used car prices", 
+     xlab = "Price ($)")
+hist(usedcars$mileage, main = "Histogram of used car mileage",
+     xlab = "Odometer (mi.)")
