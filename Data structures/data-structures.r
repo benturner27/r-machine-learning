@@ -169,3 +169,48 @@ pt_data <- read.csv("pt_data.csv", stringsAsFactors = TRUE)
 
 #writing a csv file, without using row names in file
 write.csv(pt_data, file = "pt_data.csv", row.names = FALSE)
+
+#Exploring and Understanding data
+
+#Reading usedcars csv file into environment
+usedcars <- read.csv(("usedcars.csv"))
+
+#Using str function to list all variables and observations in data frame
+str(usedcars)
+
+#Using summary function to display statistics from year variable
+summary(usedcars$year)
+
+#Using summary to display statistics from multiple variables
+summary(usedcars[c("year", "mileage")])
+
+#Example of mean and median  statistics
+
+#manually calculating the mean (commonly known as average) of 3 different
+#salaries
+(36000 + 44000 + 56000) / 3
+
+#Using mean function to calculate the mean of 3 different salaries
+mean(c(36000, 44000, 56000))
+
+#Using median function to calculate the median of 3 different salaries
+median(c(36000, 44000, 56000))
+
+#Using range to show the minimum and maximum values of the price variable
+range(usedcars$price)
+
+#using diff function to calculate the difference between the two values
+diff(range(usedcars$price))
+
+#Using IQR to work out the interquartile range (Q1 and Q3) of the price variable
+IQR(usedcars$price)
+
+#Using quantile function to show the data at different ranges in price
+quantile(usedcars$price)
+
+#Obtaining 1st and 99th percentiles using quantile function
+quantile(usedcars$price, probs = c(0.01, 0.99))
+
+#Obtaining custom quantile ranges using the quantile function
+quantile(usedcars$price, seq(from = 0, to = 1, by = 0.20))
+
