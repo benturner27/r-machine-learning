@@ -23,5 +23,23 @@ temperature[c(TRUE, TRUE, FALSE)]
 fever <- temperature > 100
 subject_name[fever]
 
-#Alternative way of retriving subject name
+#Alternative way of retrieving subject name
 subject_name[temperature > 100]
+
+#Factors
+
+#Creating a factor for patient gender data
+gender <- factor(c("MALE", "FEMALE", "MALE"))
+
+#Creating another factor for patient blood type data
+blood <- factor(c("O", "AB", "A"),
+                levels = c("A", "AB", "B", "O"))
+
+#Creating symptoms factor with ordered parameter
+symptoms <- factor(c("SEVERE", "MILD", "MODERATE"),
+                   levels = c("MILD", "MODERATE", "SEVERE"),
+                   ordered = TRUE)
+
+#retrieving data on patient symptoms
+symptoms > "MODERATE"
+
