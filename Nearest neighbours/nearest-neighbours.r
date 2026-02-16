@@ -42,3 +42,28 @@ wbcd_n <- as.data.frame(lapply(wbcd[2:31], normalise))
 
 #confirming numerical data is normalised by checking summary function
 summary(wbcd_n$area_mean)
+
+#Data Preparation
+
+#Splitting data frame into training and testing batches for modelling
+wbcd_train <- wbcd_n[1:469, ]
+wbcd_test <- wbcd_n[470:569, ]
+
+#Create batches from original data frame with only the diagnosis column
+#Will be used for evaluation of model
+
+wbcd_train_labels <- wbcd[1:469, 1]
+wbcd_test_labels <- wbcd[470:569, 1]
+
+
+
+
+
+
+
+
+
+
+
+
+
