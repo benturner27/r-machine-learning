@@ -40,7 +40,7 @@ symptoms <- factor(c("SEVERE", "MILD", "MODERATE"),
                    levels = c("MILD", "MODERATE", "SEVERE"),
                    ordered = TRUE)
 
-#retrieving data on patient symptoms
+#Retrieving data on patient symptoms
 symptoms > "MODERATE"
 
 #Lists
@@ -64,7 +64,7 @@ subject1 <- list(fullname = subject_name[1],
 #Calling the list object
 subject1
 
-#retrieving a sub-list from the list object
+#Retrieving a sub-list from the list object
 subject1[2]
 
 #Retrieving only the value of an index in the list object
@@ -83,5 +83,65 @@ subject1[c("temperature", "flu_status")]
 pt_data <- data.frame(subject_name, temperature, flu_status, gender, blood,
                       symptoms)
 
-#calling data frame
+#Calling data frame
 pt_data
+
+#Retrieving data from a data frame, using the $ operator
+pt_data$subject_name
+
+#Retrieving specific data using specified coordinates
+pt_data[1, 2]
+
+#Retrieving certain rows and columns using specified coordinates
+pt_data[c(1, 3), c(2, 4)]
+
+#Retrieving a whole column, leaving the row coordinate blank
+pt_data[, 1]
+
+#Retrieving a whole row, leaving the column coordinate blank
+pt_data[1, ]
+
+#Retrieving everything from data frame
+pt_data[ , ]
+
+#retrieving data from data frame using named values
+pt_data[c(1, 3), c("temperature", "gender")]
+
+#retrieving data using index positions
+pt_data[-2, c(-1, -3, -5, -6)]
+
+#function for converting degrees Fahrenheit to degrees Celcius
+pt_data$temp_c <- (pt_data$temperature - 32) * (5 / 9)
+
+#Verifying calculation works
+pt_data[c("temperature", "temp_c")]
+
+#Matrices and Arrays
+
+#Creating a 2x2 matrix using nrow parameter
+m <- matrix(c(1, 2, 3, 4), nrow = 2)
+
+#Calling matrix
+m
+
+#Creating a 2x2 matrix using the ncol parameter
+m2 <- matrix(c(1, 2, 3, 4), ncol = 2)
+
+#Calling matrix
+m2
+
+#Creating a 2x3 matrix using the nrow parameter
+m3 <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+
+#Calling matrix
+m3
+
+#Creating a 3x2 matrix using the ncol parameter
+m4 <- matrix(c(1, 2, 3, 4, 5, 6), ncol = 2)
+
+#Calling matrix
+m4
+
+#Retrieving rows and columns from matrix
+m4[1, ]
+m4[, 1]
