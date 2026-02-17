@@ -133,3 +133,27 @@ ham <- subset(sms_raw, type == "ham")
 #Creating separate wordclouds for ham and spam types
 wordcloud(spam$text, max.words = 40, scale = c(3, 0.5))
 wordcloud(ham$text, max.words = 40, scale = c(3, 0.5))
+
+#Frequent word indicators
+
+#Using findFreqTerms to find popular words used in dataset
+findFreqTerms(sms_dtm_train, 5)
+
+#Saving function as vector
+sms_freq_words <- findFreqTerms(sms_dtm_train, 5)
+
+#using str function to see amount of frequent words
+str(sms_freq_words)
+
+#filtering only frequent words into training and testing sets
+sms_dtm_freq_train <- sms_dtm_train[ , sms_freq_words]
+sms_dtm_freq_test <- sms_dtm_test[ , sms_freq_words]
+
+#Creating custom function converting numerical counts to categorical count
+convert_counts <- function(x) {
+  x <- ifelse(x > 0, "yes", "no")
+}
+
+#Apply convert_counts function to training and testing sets using apply function
+sms_train <- apply(sms_dtm_freq_train, MARGIN = 2, convert_counts)
+sms_test <- apply(sms_dtm_freq_test, MARGIN = 2, convert_counts)
