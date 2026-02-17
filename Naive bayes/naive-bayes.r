@@ -177,3 +177,16 @@ library(gmodels)
 CrossTable(sms_test_pred, sms_test_labels,
            prop.chisq = FALSE, prop.c = FALSE, prop.r = FALSE,
            dnn = c("Predicted", "Actual"))
+
+#Model optimisation
+
+#Creating second classifier with laplace smoothing parameter
+sms_classifier2 <- naive_bayes(sms_train, sms_train_labels, laplace = 1)
+
+#Building second prediction model using sms_classifier2
+sms_test_pred2 <- predict(sms_classifier2, sms_test)
+
+#Evaluating second prediction model using CrossTable
+CrossTable(sms_test_pred2, sms_test_labels,
+           prop.chisq = FALSE, prop.c = FALSE, prop.r = FALSE,
+           dnn = c("Predicted", "Actual"))
