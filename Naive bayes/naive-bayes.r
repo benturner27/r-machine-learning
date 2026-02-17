@@ -76,14 +76,14 @@ wordStem(c("learn", "learning", "learned", "learns"))
 #Word stemming document using tm_map, stemDocument as parameter
 sms_corpus_clean <- tm_map(sms_corpus_clean, stemDocument)
 
-#Stripping additional whitespace using tm_map, stripWhitespace as parameter
+#Stripping additional white space using tm_map, stripWhitespace as parameter
 sms_corpus_clean<- tm_map(sms_corpus_clean, stripWhitespace)
 
 #final verification that corpus is cleaned accordingly
 lapply(sms_corpus[1:3], as.character)
 lapply(sms_corpus_clean[1:3], as.character)
 
-#Splitting Documents into words
+#Document to word splitting
 
 #Creating DocumentTermMatrix
 sms_dtm <- DocumentTermMatrix(sms_corpus_clean)
@@ -117,3 +117,19 @@ sms_test_labels <- sms_raw[4170:5559, ]$type
 #verifying labelled sets are representative of complete set
 prop.table(table(sms_train_labels))
 prop.table(table(sms_test_labels))
+
+#Text data visualisation
+
+#Loading library wordcloud
+library(wordcloud)
+
+#Creating wordcloud from cleaned corpus data
+wordcloud(sms_corpus_clean, min.freq = 50, random.order = FALSE)
+
+#Creating ham and spam subsets for separate wordclouds
+spam <- subset(sms_raw, type == "spam")
+ham <- subset(sms_raw, type == "ham")
+
+#Creating separate wordclouds for ham and spam types
+wordcloud(spam$text, max.words = 40, scale = c(3, 0.5))
+wordcloud(ham$text, max.words = 40, scale = c(3, 0.5))
