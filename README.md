@@ -14,4 +14,4 @@ This directory is associated with Chapter 3 in the book, which focuses on using 
 
 ### Naive Bayes
 
-This directory is associated with Chapter 4 in the book, which focuses on the catergorical model of Naive Bayes. It showcases text corpuses, text data cleaning, Document Text Matrices (DTM), visualising texts into wordclouds as well as creating and implemneting frequent word indicators, in addition to building a classifier and the prediction model for evaluation.
+This directory is associated with Chapter 4 in the book, which focuses on the categorical model of Naive Bayes. It showcases text corpuses, text data cleaning, Document Text Matrices (DTM), visualising texts into word clouds as well as creating and implementing frequent word indicators, in addition to building a classifier and the prediction model for evaluation.
