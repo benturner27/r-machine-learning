@@ -17,6 +17,8 @@ table(sms_raw$type)
 
 #Data preparation
 
+#Standardising text data
+
 #loading library tm
 library(tm)
 
@@ -76,3 +78,28 @@ sms_corpus_clean <- tm_map(sms_corpus_clean, stemDocument)
 
 #Stripping additional whitespace using tm_map, stripWhitespace as parameter
 sms_corpus_clean<- tm_map(sms_corpus_clean, stripWhitespace)
+
+#final verification that corpus is cleaned accordingly
+lapply(sms_corpus[1:3], as.character)
+lapply(sms_corpus_clean[1:3], as.character)
+
+#Splitting Documents into words
+
+#Creating DocumentTermMatrix
+sms_dtm <- DocumentTermMatrix(sms_corpus_clean)
+
+#Alternative to cleaning text data using DocumentTermMatrix with parameters
+sms_dtm2 <- DocumentTermMatrix(sms_corpus, control = list(
+  tolower = TRUE,
+  removeNumbers = TRUE,
+  stopwords = TRUE,
+  removePunctuation = TRUE,
+  stemming = TRUE
+))
+
+#Comparing the two cleaned datasets
+sms_dtm
+sms_dtm2
+
+#Creating custom function for stopword removal to use with DTM
+stopwords <- function(x){ removeWords(x, stopwords())}
