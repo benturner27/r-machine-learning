@@ -11,3 +11,7 @@ This directory is associated with Chapter 2 in the book, which focuses on basic 
 ### Nearest Neighbours
 
 This directory is associated with Chapter 3 in the book, which focuses on using a Nearest Neighbour model. It also implements basic data processing, numerical data standardisation and cross-tabulation for model evaluation.
+
+### Naive Bayes
+
+This directory is associated with Chapter 4 in the book, which focuses on the catergorical model of Naive Bayes. It showcases text corpuses, data cleaning, Document-Text Matrices (DTM), visualising texts into wordclouds, as well as creating frequent word indicators, in addition to building a classifier and the prediction model for evaluation.
