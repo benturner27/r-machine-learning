@@ -103,3 +103,17 @@ sms_dtm2
 
 #Creating custom function for stopword removal to use with DTM
 stopwords <- function(x){ removeWords(x, stopwords())}
+
+#Creating training and testing datasets
+
+#splitting DTM into training and testing sets
+sms_dtm_train <- sms_dtm[1:4169, ]
+sms_dtm_test <- sms_dtm2[4170:5559, ]
+
+#creating sets with labels for model evaluation
+sms_train_labels <- sms_raw[1:4169, ]$type
+sms_test_labels <- sms_raw[4170:5559, ]$type
+
+#verifying labelled sets are representative of complete set
+prop.table(table(sms_train_labels))
+prop.table(table(sms_test_labels))
