@@ -157,3 +157,11 @@ convert_counts <- function(x) {
 #Apply convert_counts function to training and testing sets using apply function
 sms_train <- apply(sms_dtm_freq_train, MARGIN = 2, convert_counts)
 sms_test <- apply(sms_dtm_freq_test, MARGIN = 2, convert_counts)
+
+#Data modelling
+
+#loading library naivebayes
+library(naivebayes)
+
+#Building Naive Bayes model
+sms_classifier <- naive_bayes(sms_train, sms_train_labels)
