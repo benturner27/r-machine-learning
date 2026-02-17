@@ -165,3 +165,15 @@ library(naivebayes)
 
 #Building Naive Bayes model
 sms_classifier <- naive_bayes(sms_train, sms_train_labels)
+
+#Model prediction
+
+#Using predict function for ham or spam prediction on testing data set
+sms_test_pred <- predict(sms_classifier, sms_test)
+
+#Evaluating model using CrossTable, cross-tabulating predicted data with
+#labelled data
+library(gmodels)
+CrossTable(sms_test_pred, sms_test_labels,
+           prop.chisq = FALSE, prop.c = FALSE, prop.r = FALSE,
+           dnn = c("Predicted", "Actual"))
