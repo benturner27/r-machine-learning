@@ -47,3 +47,14 @@ credit_test <- credit[-train_sample, ]
 #Testing for representative data for defaults using prop.table
 prop.table(table(credit_train$default))
 prop.table(table(credit_test$default))
+
+#Data modelling
+
+#Loading library C50
+library(C50)
+
+#Training the C5.0 Decision Trees model on credit_train dataset
+credit_model <- C5.0(default ~ ., data = credit_train)
+
+#Analysing the tree's decisions
+summary(credit_model)
