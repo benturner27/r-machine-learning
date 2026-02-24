@@ -69,3 +69,18 @@ library(gmodels)
 CrossTable(credit_test$default, credit_pred,
            prop.chisq = FALSE, prop.c = FALSE, prop.r = FALSE,
            dnn = c("Actual default", "Predicted result"))
+
+#Improving model performance
+
+#Boosting DT accuracy
+
+#Specifying 10 trials to be used for data modelling to limit the amount of
+#unnecessary splits in data
+credit_boost <- C5.0(default ~ ., data = credit_train,
+                     trials = 10)
+
+#Applying the boosted model to the testing data and evaluating its performance
+credit_boost_pred2 <- predict(credit_boost, credit_test)
+CrossTable(credit_test$default, credit_boost_pred2,
+           prop.chisq = FALSE, prop.c = FALSE, prop.r = FALSE,
+           dnn = c("Actual result", "Predicted result"))
