@@ -58,3 +58,14 @@ credit_model <- C5.0(default ~ ., data = credit_train)
 
 #Analysing the tree's decisions
 summary(credit_model)
+
+#Evaluating model performance
+
+#Applying training model onto testing data using predict function C.50
+credit_pred <- predict(credit_model, credit_test)
+
+#Using CrossTable to evaluate results with data in data frame
+library(gmodels)
+CrossTable(credit_test$default, credit_pred,
+           prop.chisq = FALSE, prop.c = FALSE, prop.r = FALSE,
+           dnn = c("Actual default", "Predicted result"))
