@@ -80,7 +80,25 @@ credit_boost <- C5.0(default ~ ., data = credit_train,
                      trials = 10)
 
 #Applying the boosted model to the testing data and evaluating its performance
-credit_boost_pred2 <- predict(credit_boost, credit_test)
-CrossTable(credit_test$default, credit_boost_pred2,
+credit_boost_pred <- predict(credit_boost, credit_test)
+CrossTable(credit_test$default, credit_boost_pred,
+           prop.chisq = FALSE, prop.c = FALSE, prop.r = FALSE,
+           dnn = c("Actual result", "Predicted result"))
+
+#Cost Matrix
+
+#Specifying dimensions for a 2x2 matrix to use while modelling
+matrix_dimensions <- list(c("no", "yes"), c("no", "yes"))
+names(matrix_dimensions) <- c("predicted", "actual")
+
+#Creating 2x2 matrix calculating cost of loan defaults for modelling
+error_cost <- matrix(c(0, 1, 4, 0), nrow = 2,
+                     dimnames = matrix_dimensions)
+
+#Adding error_cost to training model
+credit_cost <- C5.0(default ~ ., data = credit_train,
+                    costs = error_cost)
+credit_cost_pred <- predict(credit_cost, credit_test)
+CrossTable(credit_test$default, credit_cost_pred,
            prop.chisq = FALSE, prop.c = FALSE, prop.r = FALSE,
            dnn = c("Actual result", "Predicted result"))
