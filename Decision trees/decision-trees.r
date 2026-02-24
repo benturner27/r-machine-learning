@@ -31,3 +31,19 @@ summary(credit$amount)
 #Checking the proportion of applicants have defaulted using table
 table(credit$default)
 
+#Splitting and creating random training and testing sets
+
+#Creating training and testing datasets using set.seed and sample functions.
+#Needed for this case so model is able to test for any application no matter
+#the amount, duration or default status for accurate modelling
+set.seed(9829)
+train_sample <- sample(1000, 900)
+str(train_sample)
+
+#Creating training and testing datasets
+credit_train <- credit[train_sample, ]
+credit_test <- credit[-train_sample, ]
+
+#Testing for representative data for defaults using prop.table
+prop.table(table(credit_train$default))
+prop.table(table(credit_test$default))
