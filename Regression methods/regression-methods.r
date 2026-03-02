@@ -95,3 +95,19 @@ library(psych)
 #using pairs.panels function to create more insightful scatterplot matrix
 pairs.panels(insurance[c("age", "est_value", "miles_driven", "expenses")],
       pch = ".")
+
+#Training model on data
+
+#For specifying certain independent values to train against the dependent value
+ins_model <- lm(expenses ~ age + geo_area + vehicle_type + 
+                  est_values + miles_driven + college_grad_ind +
+                  sppeding_ticket_ind + hard_braking_ind +
+                  late_driving_ind + clean_driving_ind,
+                data = insurance)
+
+#For training all features against dependent value
+ins_model <- lm(expenses ~ ., data = insurance)
+
+#Calling model to view estimated beta coefficients
+options(scipen = 999) #turns off scientific notation, easier to read
+ins_model
