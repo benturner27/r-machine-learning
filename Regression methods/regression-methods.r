@@ -54,3 +54,23 @@ reg(y = launch$distress_ct, x = launch[2])
 #Using reg function to calculate multiple regression module, multiplying
 #distress_ct by other three variables in data frame
 reg(y = launch$distress_ct, x = launch[2:4])
+
+#------------------------------------------------------------------------------
+
+#Generalised Linear Models and Logistic Regression
+
+#Collecting and Preparing Data
+
+#load csv into environment
+insurance <- read.csv("autoinsurance.csv", stringsAsFactors = TRUE)
+str(insurance)
+
+#Using summary to check for normality under expenses variable
+summary(insurance$expenses)
+
+#Verifying data is right-skewed by creating histogram
+hist(insurance$expenses)
+
+#Exploring the distribution of geo_area and vehicle_type variables
+table(insurance$geo_area)
+table(insurance$vehicle_type)
