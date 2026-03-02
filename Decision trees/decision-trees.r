@@ -131,3 +131,11 @@ mushroom_1R <- OneR(type ~ ., data = mushrooms)
 
 #Calling model for quick analysis
 mushroom_1R
+
+#Model Prediction and evaluation
+
+#Using the training model to predict mushroom type
+mushroom_1R_pred <- predict(mushroom_1R, mushrooms)
+
+#Evaluating prediction model
+table(actual = mushrooms$type, predicted = mushroom_1R_pred)
