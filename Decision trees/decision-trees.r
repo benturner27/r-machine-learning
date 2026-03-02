@@ -120,3 +120,14 @@ mushrooms$veil_type = NULL
 
 #Analysing type distribution using table
 table(mushrooms$type)
+
+#Data Modelling
+
+#loading library OneR
+library(OneR)
+
+#Applying OneR model to data frame
+mushroom_1R <- OneR(type ~ ., data = mushrooms)
+
+#Calling model for quick analysis
+mushroom_1R
