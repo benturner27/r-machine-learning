@@ -116,3 +116,18 @@ ins_model
 
 #Using summary to evaluate the model's performance and how well it fits the data
 summary(ins_model)
+
+#Improving Model Performance
+
+#Non-linear relationships
+
+#Creating age-squared variable to data frame in order to add higher order term
+insurance$age2 <- insurance$age^2
+
+#Training second model including higher order term and intreaction between
+#hard_braking_ind and late_driving_ind
+ins_model2 <- lm(expenses ~ . + hard_braking_ind:late_driving_ind,
+                 data = insurance)
+
+#Viewing summary to see if model has improved performance
+summary(ins_model2)
