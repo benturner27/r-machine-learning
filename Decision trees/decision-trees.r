@@ -153,4 +153,6 @@ mushroom_JRip <- JRip(type ~ ., data = mushrooms)
 #Calling model for quick analysis
 mushroom_JRip
 
-#Implementing prediction and evaulation of model
+#Implementing prediction and evaluation of model
+mushroom_JRip_pred = predict(mushroom_JRip, mushrooms)
+table(actual = mushrooms$type, predicted = mushroom_JRip_pred)
