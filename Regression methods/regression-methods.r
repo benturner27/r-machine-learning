@@ -74,3 +74,24 @@ hist(insurance$expenses)
 #Exploring the distribution of geo_area and vehicle_type variables
 table(insurance$geo_area)
 table(insurance$vehicle_type)
+
+#Exploring relationships with features
+
+#Correlation matrix
+
+#Creating a correlation matrix of four non-numeric variables using cor function
+cor(insurance[c("age", "est_value", "miles_driven", "expenses")])
+
+#Scatterplot Matrix
+
+#Creating a scatterplot matrix of the four variables from ealier using pairs
+#function to detect patterns and potential relationship in the data
+pairs(insurance[c("age", "est_value", "miles_driven", "expenses")],
+      pch = ".")
+
+#Loading library psych
+library(psych)
+
+#using pairs.panels function to create more insightful scatterplot matrix
+pairs.panels(insurance[c("age", "est_value", "miles_driven", "expenses")],
+      pch = ".")
