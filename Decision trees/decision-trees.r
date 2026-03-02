@@ -139,3 +139,18 @@ mushroom_1R_pred <- predict(mushroom_1R, mushrooms)
 
 #Evaluating prediction model
 table(actual = mushrooms$type, predicted = mushroom_1R_pred)
+
+#Improving model performance
+
+#loading library RWeka
+#library rJava is needed for this library, check JDK is installed on device
+library(rJava)
+library(RWeka)
+
+#Applying RWeka model to data frame
+mushroom_JRip <- JRip(type ~ ., data = mushrooms)
+
+#Calling model for quick analysis
+mushroom_JRip
+
+#Implementing prediction and evaulation of model
