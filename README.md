@@ -16,6 +16,6 @@ This directory is associated with Chapter 3 in the book, which focuses on using 
 
 This directory is associated with Chapter 4 in the book, which focuses on the categorical model of Naive Bayes. It showcases text corpuses, text data cleaning, Document Text Matrices (DTM), visualising texts into word clouds as well as creating and implementing frequent word indicators, in addition to building a classifier and the prediction model for evaluation.
 
-###Decision Trees
+### Decision Trees
 
 This directory is associated with Chapter 5 in the book, which focuses on the Decision Trees model. This showcases how Decision Tree operates using divide and conquer for segmentation, as well as implementing model optimisations such as multiple trials and error costs. This also shows an addition model named Rule Learners, which shows off One Rule and RIPPER based algorithms for class separation and rule learning.
