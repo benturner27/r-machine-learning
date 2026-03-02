@@ -111,3 +111,8 @@ ins_model <- lm(expenses ~ ., data = insurance)
 #Calling model to view estimated beta coefficients
 options(scipen = 999) #turns off scientific notation, easier to read
 ins_model
+
+#Evaluating model performance
+
+#Using summary to evaluate the model's performance and how well it fits the data
+summary(ins_model)
