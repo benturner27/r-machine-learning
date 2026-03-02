@@ -10,6 +10,8 @@
 curve(-x * log2(x) - (1 - x) * log2(1 - x),
       col = "red", xlab = "x", ylab = "entropy", lwd = 4)
 
+#------------------------------------------------------------------------------
+
 #Data Preparation
 
 #Data analysis
@@ -102,3 +104,19 @@ credit_cost_pred <- predict(credit_cost, credit_test)
 CrossTable(credit_test$default, credit_cost_pred,
            prop.chisq = FALSE, prop.c = FALSE, prop.r = FALSE,
            dnn = c("Actual result", "Predicted result"))
+
+#------------------------------------------------------------------------------
+
+#Rule Learners
+
+#Data Analysis
+
+#Read CSV to environment
+mushrooms <- read.csv("mushrooms.csv", stringsAsFactors = TRUE)
+str(mushrooms)
+
+#Dropping veil type feature from dataset
+mushrooms$veil_type = NULL
+
+#Analysing type distribution using table
+table(mushrooms$type)
