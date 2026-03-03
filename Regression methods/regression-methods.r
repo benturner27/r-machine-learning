@@ -131,3 +131,45 @@ ins_model2 <- lm(expenses ~ . + hard_braking_ind:late_driving_ind,
 
 #Viewing summary to see if model has improved performance
 summary(ins_model2)
+
+#Making Predictions
+
+#Adding prediction model to data frame
+insurance$pred <- predict(ins_model2, insurance)
+
+#Calculating correlation between predicted and actual expenses
+cor(insurance$pred, insurance$expenses)
+
+#Visualising relationship using scatterplot
+plot(insurance$pred, insurance$expenses)
+abline(a = 0, b = 1, col = "red", lwd = 3, lty = 2)
+
+#Predicting a new prospective customer: 30 y/o truck driver, vehicle valued at
+#$25,000, driven 14,000 miles and clean driving record
+predict(ins_model2, 
+        data.frame(age = 30, age2 = 30^2, geo_area = "rural",
+                   vehicle_type = "truck", est_value = 25000,
+                   miles_driven = 14000, college_grad_ind = 0,
+                   speeding_ticket_ind = 0, hard_braking_ind = 0,
+                   late_driving_ind = 0, clean_driving_ind = 1))
+
+#Predicting similar driver with same values, but has had an accident recently
+predict(ins_model2, 
+        data.frame(age = 30, age2 = 30^2, geo_area = "rural",
+                   vehicle_type = "truck", est_value = 25000,
+                   miles_driven = 14000, college_grad_ind = 0,
+                   speeding_ticket_ind = 0, hard_braking_ind = 0,
+                   late_driving_ind = 0, clean_driving_ind = 0))
+
+#Predicting similar driver with same values, but has drive 10,000 more miles
+predict(ins_model2, 
+        data.frame(age = 30, age2 = 30^2, geo_area = "rural",
+                   vehicle_type = "truck", est_value = 25000,
+                   miles_driven = 24000, college_grad_ind = 0,
+                   speeding_ticket_ind = 0, hard_braking_ind = 0,
+                   late_driving_ind = 0, clean_driving_ind = 0))
+
+#Confirming that the difference in premiums between the second and third
+#predictions will give the same total as the estimated coefficient for
+#miles_driven
+2435.384 - 1247.903
