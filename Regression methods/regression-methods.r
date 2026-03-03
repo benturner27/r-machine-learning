@@ -173,3 +173,37 @@ predict(ins_model2,
 #predictions will give the same total as the estimated coefficient for
 #miles_driven
 2435.384 - 1247.903
+
+#------------------------------------------------------------------------------
+
+#Predicting Policyholder churn with Logistic Regression
+
+#Reading csv to environment
+churn_data <- read.csv("insurance_churn.csv")
+
+#Using prop.table to view the overall churn rate
+prop.table(table(churn_data$churn))
+
+#Training a general linear regression model to the churn data frame
+churn_model <- glm(churn ~ . -member_id, data = churn_data,
+                   family = binomial(link = "logit"))
+
+#Viewing the estimated regression parameters of the model using summary
+summary(churn_model)
+
+#Loading testing data to environment
+churn_test <- read.csv("insurance_churn_test.csv")
+
+#Adding prediction model to test data frame
+churn_test$churn_prob <- predict(churn_model, churn_test, 
+                                 type = "response")
+#Using summary to view the prediction results 
+summary(churn_test$churn_prob)
+
+#Using order function to make new vector with descending order of churn
+#probability (highest to lowest)
+churn_order <- order(churn_test$churn_prob, decreasing = TRUE)
+
+#Using head function to take n rows for top 5 members most likely to churn
+#including member_id values
+head(churn_test[churn_order, c("member_id", "churn_prob")], n = 5)
