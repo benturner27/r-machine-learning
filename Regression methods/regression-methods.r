@@ -295,3 +295,23 @@ MAE(p.rpart, wine_test$quality)
 #calculating MAE between actual values and mean values
 mean(wine_train$quality) #5.87
 MAE (5.87, wine_test$quality)
+
+#Improving model performance
+
+#Load library Cubist
+library(Cubist)
+
+#training model on data
+m.cubist <- cubist(x = wine_train[-12], y = wine_train$quality)
+
+#Examining the model's decisions
+m.cubist
+summary(m.cubist)
+
+#Using trained model to predict values for wine quality
+p.cubist <- predict(m.cubist, wine_test)
+
+#Evaluating model performance
+summary(p.cubist)
+cor(p.cubist, wine_test$quality)
+MAE(wine_test$quality, p.cubist)
