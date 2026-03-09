@@ -270,3 +270,28 @@ rpart.plot(m.rpart, digits = 3)
 #of split, and displays amount of overservations per split as a percentage
 rpart.plot(m.rpart, digits = 4, fallen.leaves = TRUE,
            type = 3, extra = 101)
+
+#Evaluating model performance
+
+#Predicting results of test data using trained model
+p.rpart <- predict(m.rpart, wine_test)
+
+#Checking results with original values
+summary(p.rpart)
+summary(wine$quality)
+
+#Measuring how the predicted values correspond with the actual values
+cor(p.rpart, wine_test$quality)
+
+#Evaluating using Mean Absolute Error (MAE)
+
+#Creating function that calculates the difference in predicted errors over 
+#actual values
+MAE <- function(actual, predicted) {
+  mean(abs(actual - predicted))
+}
+MAE(p.rpart, wine_test$quality)
+
+#calculating MAE between actual values and mean values
+mean(wine_train$quality) #5.87
+MAE (5.87, wine_test$quality)
