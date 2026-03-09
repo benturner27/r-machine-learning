@@ -229,6 +229,8 @@ sdr_b <- sd(tee) - (length(bt1) / length(tee) * sd(bt1) +
 sdr_a
 sdr_b
 
+#Collecting data
+
 #Write csv to environment
 wine <- read.csv(("whitewines.csv"))
 
@@ -245,3 +247,26 @@ summary(wine)
 wine_train <- wine[1:3750, ]
 wine_test <- wine[3750:4898, ]
 
+#Training a model
+
+#Load library rpart
+library(rpart)
+
+#Implementing model to training data
+m.rpart <- rpart(quality ~., data = wine_train)
+
+#Analysing model's decisions on splits
+summary(m.rpart)
+
+#Visualising decision trees
+
+#Load library rpart.plot
+library(rpart.plot)
+
+#Building a tree plot to visualise training split results
+rpart.plot(m.rpart, digits = 3)
+
+#Another visualisation style using fallen leaves, adding labels on either side
+#of split, and displays amount of overservations per split as a percentage
+rpart.plot(m.rpart, digits = 4, fallen.leaves = TRUE,
+           type = 3, extra = 101)
