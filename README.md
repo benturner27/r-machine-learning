@@ -19,3 +19,7 @@ This directory is associated with Chapter 4 in the book, which focuses on the ca
 ### Decision Trees
 
 This directory is associated with Chapter 5 in the book, which focuses on the Decision Trees model. This showcases how Decision Tree operates using divide and conquer for segmentation, as well as implementing model optimisations such as multiple trials and error costs. This also shows an addition model named Rule Learners, which shows off One Rule and RIPPER based algorithms for class separation and rule learning.
+
+### Regression Methods
+
+This directory is associated with Chapter 6 in the book, and deals with a variety of Linear Regression models, inlcuding examples of Single Linear Regression, Multiple Linear Regression, Generalised Linear Models and Logistic Regression. This chapter also showcases Absolute Mean Error for correlation between predicted values and actual values, to evaluate how accurate predicted result from associated regression methods perform.
