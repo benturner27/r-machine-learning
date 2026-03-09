@@ -228,3 +228,20 @@ sdr_b <- sd(tee) - (length(bt1) / length(tee) * sd(bt1) +
                       length(bt2) / length(tee) * sd(bt2))
 sdr_a
 sdr_b
+
+#Write csv to environment
+wine <- read.csv(("whitewines.csv"))
+
+#Analysing the format of data frame
+str(wine)
+
+#Examining wine quality distribution with histogram
+hist(wine$quality)
+
+#Checking for any outlying data
+summary(wine)
+
+#Splitting the data frame into training and testing sets
+wine_train <- wine[1:3750, ]
+wine_test <- wine[3750:4898, ]
+
