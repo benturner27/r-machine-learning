@@ -207,3 +207,24 @@ churn_order <- order(churn_test$churn_prob, decreasing = TRUE)
 #Using head function to take n rows for top 5 members most likely to churn
 #including member_id values
 head(churn_test[churn_order, c("member_id", "churn_prob")], n = 5)
+
+#------------------------------------------------------------------------------
+
+#Regression Trees and Numeric Trees
+
+#Example calculating Numeric Decision Trees
+
+#Initialising sets based on feature splits on two different points
+tee <- c(1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 6, 7, 7, 7, 7)
+at1 <- c(1, 1, 1, 2, 2, 3, 4, 5, 5)
+at2 <- c(6, 6, 7, 7, 7, 7)
+bt1 <- c(1, 1, 1, 2, 2, 3, 4)
+bt2 <- c(5, 5, 6, 6, 7, 7, 7, 7)
+
+#Calculating Standard Deviation Reduction (SDR) of both feature split variants
+sdr_a <- sd(tee) - (length(at1) / length(tee) * sd(at1) +
+                      length(at2) / length(tee) * sd(at2))
+sdr_b <- sd(tee) - (length(bt1) / length(tee) * sd(bt1) +
+                      length(bt2) / length(tee) * sd(bt2))
+sdr_a
+sdr_b
