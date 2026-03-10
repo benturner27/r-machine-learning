@@ -22,3 +22,20 @@ summary(concrete$strength)
 #Splitting the normalised data frame into training and testing sets
 concrete_train <- concrete_norm[1:773, ]
 concrete_test <- concrete_norm[774:1030, ]
+
+#Training model on data
+
+#Load library neuralnet
+library(neuralnet)
+
+#Implementing set.seed to ensure the same result is produced
+set.seed(12345)
+
+#Training the model using a single hidden node and single output node
+concrete_model <- neuralnet(strength ~ cement + slag +
+                              ash + water + superplastic +
+                              coarseagg + fineagg + age, 
+                            data = concrete_train)
+
+#Visualising single hidden layer node neural network
+plot(concrete_model)
