@@ -175,3 +175,23 @@ agreement_rbf <- letter_predictions_rbf == letters_test$letter
 table(agreement_rbf)
 prop.table(table(agreement_rbf))
 
+#SVM cost parameter
+
+#Implementing sequence of numbers to be used as the cost parameter
+cost_values <- c(1, seq(from = 5, to = 40, b = 5))
+
+#Creating a function to loop cost_values sequence on models to find most 
+#accurate cost value
+accuracy_values <- sapply(cost_values, function(x) {
+  set.seed(12345)
+  m <- ksvm(letter ~ ., data = letters_train, 
+            kernel = "rbfdot", C = x)
+  pred <- predict(m, letters_test)
+  agree <- ifelse(pred == letters_test$letter, 1, 0)
+  accuracy <- sum(agree) / nrow(letters_test)
+  return(accuracy)
+})
+
+#Visualising vector of accuracy_values onto plot showing which values increase
+#model accuracy
+plot(cost_values, accuracy_values, type = "b")
