@@ -39,3 +39,14 @@ concrete_model <- neuralnet(strength ~ cement + slag +
 
 #Visualising single hidden layer node neural network
 plot(concrete_model)
+
+#Evaluating model performance
+
+#Using trained model to predict test data
+model_results <- compute(concrete_model, concrete_test[1:8])
+
+#Retrieving model results as a variable
+predicted_strength <- model_results$net.result
+
+#Calculating correlation between predicted values and actual values
+cor(predicted_strength, concrete_test$strength)
