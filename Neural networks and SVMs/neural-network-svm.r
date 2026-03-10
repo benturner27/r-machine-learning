@@ -158,3 +158,20 @@ agreement <- letter_predictions == letters_test$letter
 #Calculating accuracy of model with actual data
 table(agreement)
 prop.table(table(agreement))
+
+#Improving model performance
+
+#Applying Gaussian RBF kernel to model, setting seed to ensure results are
+#reproducible
+set.seed(12345)
+letter_classifier_rbf <- ksvm(letter ~ ., data = letters_train,
+                              kernel = "rbfdot")
+
+#Using trained model to predict class
+letter_predictions_rbf <- predict(letter_classifier_rbf, letters_test)
+
+#Evaluating the model in same way as before
+agreement_rbf <- letter_predictions_rbf == letters_test$letter
+table(agreement_rbf)
+prop.table(table(agreement_rbf))
+
