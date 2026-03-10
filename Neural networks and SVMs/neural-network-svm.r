@@ -140,3 +140,21 @@ library(kernlab)
 letter_classifier <- ksvm(letter ~ ., data = letters_train,
                           kernel = "vanilladot")
 letter_classifier
+
+#Evaluating model performance
+
+#predicting testing data using trained model
+letter_predictions <- predict(letter_classifier, letters_test)
+
+#Examining the predicted results of vector
+head(letter_predictions)
+
+#Comparing results from predictions with actual data
+table(letter_predictions, letters_test$letter)
+
+#Creating logical vector for agreement between predicted and actual values
+agreement <- letter_predictions == letters_test$letter
+
+#Calculating accuracy of model with actual data
+table(agreement)
+prop.table(table(agreement))
