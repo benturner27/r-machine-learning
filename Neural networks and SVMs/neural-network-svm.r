@@ -108,7 +108,7 @@ unnormalise <- function(x) {
 #Implementing function to predicted results
 strengths$pred_new <- unnormalise(strengths$pred)
 
-#calculating error percentage between predicted and actual stregnth values
+#calculating error percentage between predicted and actual strength values
 strengths$error_pct <- (strengths$pred_new - strengths$actual) / 
   strengths$actual
 strengths
@@ -116,3 +116,17 @@ strengths
 #Verifying correlation between actual values and predicted values using
 #original data format
 cor(strengths$pred_new, strengths$actual)
+
+#------------------------------------------------------------------------------
+
+#Support Vector Machines
+
+#Collecting, exploring and preparing data
+
+#write CSV to document and examining document format
+letters <- read.csv("letterdata.csv")
+str(letters)
+
+#Spliting the data frame into training and esting sets
+letters_train <- letters[1:16000, ]
+letters_test <- leter[16001, 20000, ]
