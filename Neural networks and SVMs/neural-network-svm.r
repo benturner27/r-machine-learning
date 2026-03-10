@@ -124,9 +124,19 @@ cor(strengths$pred_new, strengths$actual)
 #Collecting, exploring and preparing data
 
 #write CSV to document and examining document format
-letters <- read.csv("letterdata.csv")
+letters <- read.csv("letterdata.csv", stringsAsFactors = TRUE)
 str(letters)
 
-#Spliting the data frame into training and esting sets
+#Splitting the data frame into training and esting sets
 letters_train <- letters[1:16000, ]
-letters_test <- leter[16001, 20000, ]
+letters_test <- letters[16001:20000, ]
+
+#Training model on data
+
+#Load library kernlab
+library(kernlab)
+
+#Training model on data
+letter_classifier <- ksvm(letter ~ ., data = letters_train,
+                          kernel = "vanilladot")
+letter_classifier
