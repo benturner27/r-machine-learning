@@ -37,7 +37,7 @@ concrete_model <- neuralnet(strength ~ cement + slag +
                               coarseagg + fineagg + age, 
                             data = concrete_train)
 
-#Visualising single hidden layer node neural network
+#Visualising single hidden layer node neural network topology
 plot(concrete_model)
 
 #Evaluating model performance
@@ -50,3 +50,69 @@ predicted_strength <- model_results$net.result
 
 #Calculating correlation between predicted values and actual values
 cor(predicted_strength, concrete_test$strength)
+
+#Improving model performance
+
+#Increasing the nodes in hidden layer to 5
+set.seed(12345)
+concrete_model2 <- neuralnet(strength ~ cement + slag +
+                               ash + water + superplastic +
+                               coarseagg + fineagg + age,
+                             data = concrete_train, hidden = 5)
+
+#Visualising second model topology
+plot(concrete_model2)
+
+#Using trained model to predict strength values and evaluate performance
+model_results2 <- compute(concrete_model2, concrete_test)
+predicted_strength2 <- model_results2$net.result
+cor(predicted_strength2, concrete_test$strength)
+
+#Defining a SoftPlus function to be used as the activation function
+softplus <- function(x) {
+  log(1 + exp(x))
+}
+
+#Building third model using softplus function
+set.seed(12345)
+concrete_model3 <- neuralnet(strength ~ cement + slag +
+                               ash + water + superplastic +
+                               coarseagg + fineagg + age,
+                             data = concrete_train, 
+                             hidden = c(5, 5),
+                             act.fct = softplus)
+
+#visualising topology of third model
+plot(concrete_model3)
+
+#Predicting and evaluating model performance
+model_results3 <- compute(concrete_model3, concrete_test)
+predicted_strength3 <- model_results3$net.result
+cor(predicted_strength3, concrete_test$strength)
+
+#Creating data frame converting model predicted values to compare with actual
+#data values
+strengths <- data.frame(
+  actual = concrete$strength[774:1030],
+  predicted = predicted_strength3
+)
+strengths
+
+#Creating unnormalise function to convert predicted results to format of actual
+#data
+unnormalise <- function(x) {
+  return(x * (max(concrete$strength) - min(concrete$strength))
+              + min(concrete$strength))
+}
+
+#Implementing function to predicted results
+strengths$pred_new <- unnormalise(strengths$pred)
+
+#calculating error percentage between predicted and actual stregnth values
+strengths$error_pct <- (strengths$pred_new - strengths$actual) / 
+  strengths$actual
+strengths
+
+#Verifying correlation between actual values and predicted values using
+#original data format
+cor(strengths$pred_new, strengths$actual)
