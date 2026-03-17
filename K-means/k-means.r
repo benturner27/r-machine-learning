@@ -57,3 +57,19 @@ teens$age <- ifelse(is.na(teens$age), ave_age, teens$age)
 
 #Verifying results
 summary(teens$age)
+
+#Training model on data
+
+#Creating data frame based only on interests
+interests <- teens[5:40]
+
+#Z-score standardising interest data using scale parameter
+interests_z <- as.data.frame(lapply(interests, scale))
+
+#Verifying standardisation is applied, using basketball variable
+summary(interests$basketball)
+summary(interests_z$basketball)
+
+#Training k-means model on data
+set.seed(12345)
+teen_clusters <- kmeans(interests_z, 5)
