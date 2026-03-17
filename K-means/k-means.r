@@ -27,3 +27,33 @@ summary(teens$age)
 
 #Cleaning age variable by removing unreasonable ages in the distribution
 teens$age <- ifelse(teens$age >= 13 & teens$age < 20, teens$age, NA)
+
+#Dealing with missing data
+
+#Creating dummy variables for females and unknown gender
+teens$female <- ifelse(teens$gender == "F" & !is.na(teens$gender), 1, 0)
+teens$no_gender <- ifelse(is.na(teens$gender), 1, 0)
+
+#Verifying dummy variables work as intended
+table(teens$gender, useNA = "ifany")
+table(teens$female, useNA = "ifany")
+table(teens$no_gender, useNA = "ifany")
+
+#Finding mean age
+mean(teens$age)
+
+#Finding mean age while excluding missing data
+mean(teens$age, na.rm = TRUE)
+
+#Using aggregate function to find mean age of each year of graduation
+aggregate(data = teens, age ~ gradyear, mean, na.rm = TRUE)
+
+#Using ave function to calculate mean age of every teen, excluding NA values
+ave_age <- ave(teens$age, teens$gradyear, 
+               FUN = function(x) mean(x, na.rm = TRUE))
+
+#Imputing values from ave_age onto NA values
+teens$age <- ifelse(is.na(teens$age), ave_age, teens$age)
+
+#Verifying results
+summary(teens$age)
