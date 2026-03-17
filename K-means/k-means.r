@@ -73,3 +73,17 @@ summary(interests_z$basketball)
 #Training k-means model on data
 set.seed(12345)
 teen_clusters <- kmeans(interests_z, 5)
+
+#Evaluating model performance
+
+#Examining he size of each cluster
+teen_clusters$size
+
+#Examining cluster centroids
+teen_clusters$centers
+
+#load library factoextra
+library(factoextra)
+
+#Visualising results of model clustering
+fviz_cluster(teen_clusters, interests_z, geom = "point")
