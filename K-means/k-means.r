@@ -87,3 +87,20 @@ library(factoextra)
 
 #Visualising results of model clustering
 fviz_cluster(teen_clusters, interests_z, geom = "point")
+
+#Improving model performance
+
+#Applying model cluster back to original data frame
+teens$cluster <- teen_clusters$cluster
+
+#Visualising how individual characteristic can relate to the clustering
+teens[1:5, c("cluster", "gender", "age", "friends")]
+
+#Exploring demographic characteristics of clustering
+aggregate(data = teens, age ~ cluster, mean)
+
+#Exploring gender share of clusters
+aggregate(data = teens, female ~ cluster, mean)
+
+#Exploring average amount of friends per cluster
+aggregate(data = teens, friends ~ cluster, mean)
