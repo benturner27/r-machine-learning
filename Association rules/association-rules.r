@@ -31,3 +31,17 @@ image(groceries[1:5])
 
 #Visualising sparse matrix for 100 random transactions
 image(sample(groceries, 100))
+
+#Training model on data
+
+#Implementing model on transactional data
+groceryrules <- apriori(groceries, parameter = list(support = 0.006,
+                        confidence = 0.25, minlen = 2))
+
+#Evaluating model performance
+
+#Exploring the overview of trained model
+summary(groceryrules)
+
+#Inspecting the association rules determined by model
+inspect(groceryrules[1:3])
