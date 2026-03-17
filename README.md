@@ -30,4 +30,8 @@ This directory is associated with Chapter 7 in the book, which showcases Artific
 
 ### Association Rules
 
-This directory is associated with Chapter 8 in the book, which introduces unsupervised learning techniques with Association Rules. Instead of using a model to predict or classify data (which is a part of supervised learning), it models based on links and relationship between data. This showcases the use of apriori and eclat models, used to define the condifence and support between two or more variables in a dataset.
+This directory is associated with Chapter 8 in the book, which introduces unsupervised learning techniques with Association Rules. Instead of using a model to predict or classify data (which is a part of supervised learning), it models based on links and relationship between data. This showcases the use of apriori and eclat models, used to define the confidence and support between two or more variables in a dataset.
+
+### Clustering and K-means 
+
+This directory is associated with Chapter 9 in he book, which showcases data clustering and the k-means model. This model is based of partition clustering, which divides data on borders without comparing similarity between other values. K-means also uses he value k to determine the amount of clusters the model should partition on. The data can also be used to explore potential links with other characteristics in data sets that may not be very useful to the model initially.
