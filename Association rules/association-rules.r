@@ -45,3 +45,32 @@ summary(groceryrules)
 
 #Inspecting the association rules determined by model
 inspect(groceryrules[1:3])
+
+#Improving model performance
+
+#Sorting learned rules by magnitude of lift
+inspect(sort(groceryrules, by = "lift")[1:5])
+
+#Creating a variable for rules associated with berries
+berryrules <- subset(groceryrules, items %in% "berries")
+inspect(berryrules)
+
+#writing learned rules to csv file
+write(groceryrules, file = "groceryrules.csv", sep = ",",
+      quote = TRUE, row.names = TRUE)
+
+#Converting rules to data frame
+groceryrules_df <- as(groceryrules, "data.frame")
+str(groceryrules_df)
+
+#Training eclat model on transactional data to determine support data
+groceryrules_eclat <- eclat(groceries, support = 0.006)
+
+#Inspecting the model decisions on support
+inspect(groceryrules_eclat[1:5])
+
+#Training model to determine confidence data
+groceryrules_eclat <- ruleInduction(groceryrules_eclat, confidence = 0.25)
+
+#Inspecting the rules determined
+inspect(groceryrules_eclat[1:5])
