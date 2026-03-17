@@ -27,3 +27,7 @@ This directory is associated with Chapter 6 in the book, and deals with a variet
 ### Neural Networks and Support Vector Machines
 
 This directory is associated with Chapter 7 in the book, which showcases Artificial Neural Networks (ANNs) and Support Vector Machines (SVMs). It includes example of ANN models built with a single hidden node, a hidden layer wih multiple nodes, as well as multiple layers with multiple nodes. It also shows examples of SVM models that have different kernels and multiple cost values in order to try the most accurate model built.
+
+### Association Rules
+
+This directory is associated with Chapter 8 in the book, which introduces unsupervised learning techniques with Association Rules. Instead of using a model to predict or classify data (which is a part of supervised learning), it models based on links and relationship between data. This showcases the use of apriori and eclat models, used to define the condifence and support between two or more variables in a dataset.
