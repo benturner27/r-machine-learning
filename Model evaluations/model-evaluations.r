@@ -66,3 +66,20 @@ mcc(sms_results$actual_type, sms_results$predict_type)
 #Calculating MCC using cor function
 cor(ifelse(sms_results$actual_type == "spam", 1, 0),
     ifelse(sms_results$predict_type == "spam", 1, 0))
+
+#Sensitivity and specificity
+
+#Manually calculating sensitivity (True Positive rate)
+sens <- 152 / (152 + 31)
+sens
+
+#Manually calculating specificity (True Negative rate)
+spec <- 1203 / (1203 + 4)
+spec
+
+#Retrieving sensitivity and specificity rate using caret
+library(caret)
+sensitivity(sms_results$predict_type, sms_results$actual_type,
+            positive = "spam")
+specificity(sms_results$predict_type, sms_results$predict_type,
+            negative = "ham")
