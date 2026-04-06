@@ -83,3 +83,20 @@ sensitivity(sms_results$predict_type, sms_results$actual_type,
             positive = "spam")
 specificity(sms_results$predict_type, sms_results$predict_type,
             negative = "ham")
+
+#Precision and Recall
+
+#Calculating precision (Positive predictive value)
+prec <- 152 / (152 + 4)
+prec
+
+#Caclulating recall
+rec <- 152 / (152 + 31)
+rec
+
+#Retrieving precision and recall figures using caret
+library(caret)
+posPredValue(sms_results$predict_type, sms_results$actual_type,
+             positive = "spam")
+sensitivity(sms_results$predict_type, sms_results$actual_type,
+            positive = "spam")
