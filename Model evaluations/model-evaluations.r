@@ -53,3 +53,16 @@ Kappa(table(sms_results$actual_type, sms_results$predict_type))
 library(irr)
 kappa2(sms_results[1:2])
 
+#Matthews correlation coefficient (MCC)
+
+#Manually calculating the MCC from sms_results
+(152 * 1203 - 4 * 31) /
+  sqrt((152 + 4) * (152 + 31) * (1203 + 4) * (1203 + 31))
+
+#Retrieving MCC using mltools
+library(mltools)
+mcc(sms_results$actual_type, sms_results$predict_type)
+
+#Calculating MCC using cor function
+cor(ifelse(sms_results$actual_type == "spam", 1, 0),
+    ifelse(sms_results$predict_type == "spam", 1, 0))
