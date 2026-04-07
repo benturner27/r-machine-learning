@@ -100,3 +100,9 @@ posPredValue(sms_results$predict_type, sms_results$actual_type,
              positive = "spam")
 sensitivity(sms_results$predict_type, sms_results$actual_type,
             positive = "spam")
+
+#F-measure
+
+#Calculating the F-measure using the prec and rec figures
+f <- (2 * prec * rec) / (prec + rec)
+f
