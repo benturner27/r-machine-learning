@@ -13,7 +13,8 @@ head(subset(sms_results, actual_type != predict_type))
 #Utilising Confusion Matrices
 
 #Building a simple confusion matrix manually
-table(sms_results$actual_type, sms_results$predict_type)
+xtab = table(sms_results$actual_type, sms_results$predict_type)
+xtab
 
 #Building a confusion matrix using CrossTable
 library(gmodels)
@@ -28,8 +29,8 @@ CrossTable(sms_results$actual_type, sms_results$predict_type)
 
 #Loading library caret
 library(caret)
-confusionMatrix(sms_results$predict_type,
-                sms_results$actual_type, positive = "spam")
+
+confusionMatrix(xtab, positive = "spam")
 
 #Calculating kappa from CrossTable figures
 
@@ -79,10 +80,8 @@ spec
 
 #Retrieving sensitivity and specificity rate using caret
 library(caret)
-sensitivity(sms_results$predict_type, sms_results$actual_type,
-            positive = "spam")
-specificity(sms_results$predict_type, sms_results$predict_type,
-            negative = "ham")
+sensitivity(xtab, positive = "spam")
+specificity(xtab, negative = "ham")
 
 #Precision and Recall
 
@@ -96,13 +95,32 @@ rec
 
 #Retrieving precision and recall figures using caret
 library(caret)
-posPredValue(sms_results$predict_type, sms_results$actual_type,
-             positive = "spam")
-sensitivity(sms_results$predict_type, sms_results$actual_type,
-            positive = "spam")
+posPredValue(xtab, positive = "spam")
+sensitivity(xtab, positive = "spam")
 
 #F-measure
 
 #Calculating the F-measure using the prec and rec figures
 f <- (2 * prec * rec) / (prec + rec)
 f
+
+#Area Under ROC Curves (AUC)
+
+#Load library pROC
+library(pROC)
+
+#Supplying the ROC with actual and prediction probabilities for visualisation
+sms_roc <- roc(sms_results$actual_type, sms_results$prob_spam)
+
+#Visualising ROC to a plot
+plot(sms_roc, main = "ROC curve for SMS spam filter",
+      col = "blue", lwd = 2, grid = TRUE, legacy.axes = TRUE)
+
+#Comparing model to KNN model on same data
+sms_results_knn = read.csv("sms_results_knn.csv")
+sms_roc_knn = roc(sms_results$actual_type, sms_results_knn$p_spam)
+plot(sms_roc_knn, col = "red", lwd = 2, add = TRUE)
+
+#Calculating AUC percentage on both models' ROC
+auc(sms_roc)
+auc(sms_roc_knn)
