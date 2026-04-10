@@ -121,6 +121,57 @@ sms_results_knn = read.csv("sms_results_knn.csv")
 sms_roc_knn = roc(sms_results$actual_type, sms_results_knn$p_spam)
 plot(sms_roc_knn, col = "red", lwd = 2, add = TRUE)
 
-#Calculating AUC percentage on both models' ROC
+#Retrieving AUC percentage on both models' ROC
 auc(sms_roc)
 auc(sms_roc_knn)
+
+#Estimating future performance
+
+#Read csv to environment
+credit <- read.csv("credit.csv", stringsAsFactors = TRUE)
+
+#Create randomly generated list of 1000 ids for data frame
+random_ids <- order(runif(1000))
+
+#Splitting data frame into train, test and validation batches with random IDs
+credit_train <- credit[random_ids[1:500], ]
+credit_validate <- credit[random_ids[501:750], ]
+credit_test <- credit[random_ids[751:1000], ]
+
+#Implementing stratified random sampling, ensuring that datasets have roughly
+#the same proportion of data as the full dataset
+library(caret)
+in_train <- createDataPartition(credit$default, p = 0.75, list = FALSE)
+credit_train <- credit[in_train, ]
+credit_test <- credit[-in_train, ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
