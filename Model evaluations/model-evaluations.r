@@ -181,8 +181,17 @@ str(cv_results)
 mean(unlist(cv_results))
 sd(unlist(cv_results))
 
+#Bootstrap sampling
 
+#Calculating the probability that an entry in a 1,000 row long dataset is not
+#selected for a training or testing set
+(1 - (1 / 1000))^1000
 
+#Same conditions for a 100,000 row long data set
+(1 - (1 / 100000))^100000
+
+#When n reaches infinity, formula reduces to 1 / exp
+1 / exp(1)
 
 
 

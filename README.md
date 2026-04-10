@@ -22,11 +22,11 @@ This directory is associated with Chapter 5 in the book, which focuses on the De
 
 ### Regression Methods
 
-This directory is associated with Chapter 6 in the book, and deals with a variety of Linear Regression models, inlcuding examples of Single Linear Regression, Multiple Linear Regression, Generalised Linear Models and Logistic Regression. This chapter also showcases Absolute Mean Error for correlation between predicted values and actual values, to evaluate how accurate predicted result from associated regression methods perform.
+This directory is associated with Chapter 6 in the book, and deals with a variety of Linear Regression models, including examples of Single Linear Regression, Multiple Linear Regression, Generalised Linear Models and Logistic Regression. This chapter also showcases Absolute Mean Error for correlation between predicted values and actual values, to evaluate how accurate predicted result from associated regression methods perform.
 
 ### Neural Networks and Support Vector Machines
 
-This directory is associated with Chapter 7 in the book, which showcases Artificial Neural Networks (ANNs) and Support Vector Machines (SVMs). It includes example of ANN models built with a single hidden node, a hidden layer wih multiple nodes, as well as multiple layers with multiple nodes. It also shows examples of SVM models that have different kernels and multiple cost values in order to try the most accurate model built.
+This directory is associated with Chapter 7 in the book, which showcases Artificial Neural Networks (ANNs) and Support Vector Machines (SVMs). It includes example of ANN models built with a single hidden node, a hidden layer with multiple nodes, as well as multiple layers with multiple nodes. It also shows examples of SVM models that have different kernels and multiple cost values in order to try the most accurate model built.
 
 ### Association Rules
 
@@ -34,4 +34,8 @@ This directory is associated with Chapter 8 in the book, which introduces unsupe
 
 ### Clustering and K-means 
 
-This directory is associated with Chapter 9 in he book, which showcases data clustering and the k-means model. This model is based of partition clustering, which divides data on borders without comparing similarity between other values. K-means also uses he value k to determine the amount of clusters the model should partition on. The data can also be used to explore potential links with other characteristics in data sets that may not be very useful to the model initially.
+This directory is associated with Chapter 9 in the book, which showcases data clustering and the k-means model. This model is based of partition clustering, which divides data on borders without comparing similarity between other values. K-means also uses he value k to determine the amount of clusters the model should partition on. The data can also be used to explore potential links with other characteristics in data sets that may not be very useful to the model initially.
+
+### Model Evaluations
+
+This directory is associated with Chapter 10 in the book, which introduces additional features and statistics for evaluating how well a model has performed on a dataset. These include the metrics of accuracy, kappa, the Matthews correlation coefficient (MCC), F-measure, sensitivity, specificity, precision and recall. This also showcases different ways to obtain a confusion matrix, and introduces cross-validation as a way to maximise the data obtained for improving model performance.
