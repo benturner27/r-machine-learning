@@ -42,3 +42,44 @@ p + geom_density(aes(x = Age,
                  alpha = 0.25) +
   ggtitle("Density of Age by Titanic Survival Status")
 
+#Creating a bar chart to illustrate passenger counts by gender
+p + geom_bar(aes(x = Sex)) +
+  ggtitle("Titanic Passenger Counts by Gender")
+
+#Creating a bar chart visualising titanic survival rate by gender
+p + geom_bar(aes(x = Sex, y = Survived),
+             stat = "summary", fun = "mean") +
+  ggtitle("Titanic Survival Rate by Gender")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
