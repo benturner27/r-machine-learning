@@ -51,9 +51,35 @@ p + geom_bar(aes(x = Sex, y = Survived),
              stat = "summary", fun = "mean") +
   ggtitle("Titanic Survival Rate by Gender")
 
+#Creating a bar chart visualising titanic survival rate by passenger class
+p + geom_bar(aes(x = Pclass, y = Survived),
+             stat = "summary", fun = "mean") +
+  ggtitle("Titanic Survival Rate by Passenger Class")
 
+#Creating a bar chart visualising titanic survival count by passenger class
+p + geom_bar(aes(x = Pclass,
+                 fill = factor(Survived,
+                               labels = c("No", "Yes")))) +
+  labs(fill = "Survived") +
+  ylab("Number of passengers") +
+  ggtitle("Titanic Survival Count by Passenger Class")
 
+#Creating a bar chart visualising proportions of passenger classes that
+#survived the titanic crash
+p + geom_bar(aes(x = Pclass,
+                 fill = factor(Survived,
+                               labels = c("No", "Yes"))),
+             position = "fill") +
+  labs(fill = "Survived") +
+  ylab("Porportion of passengers") +
+  ggtitle("Titanic Survival by Passenger Class")
 
+#Creating a bar chart that visualises titanic survival rates by passenger class 
+#and sex
+p + geom_bar(aes(x = Pclass, y = Survived, fill = Sex),
+             position = "dodge", stat = "summary", fun = "mean") +
+  ylab("Survival proportion") +
+  ggtitle("Titanic Survival Rates by Class and Sex")
 
 
 

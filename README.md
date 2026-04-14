@@ -39,3 +39,7 @@ This directory is associated with Chapter 9 in the book, which showcases data cl
 ### Model Evaluations
 
 This directory is associated with Chapter 10 in the book, which introduces additional features and statistics for evaluating how well a model has performed on a dataset. These include the metrics of accuracy, kappa, the Matthews correlation coefficient (MCC), F-measure, sensitivity, specificity, precision and recall. This also showcases different ways to obtain a confusion matrix, Receiver operating characteristic (ROC) curves, calculations for Area Under Curves (AUC) and introduces cross-validation as a way to maximise the data obtained for improving model performance.
+
+### Success in Machine Learning
+
+This directory is associated with Chapter 11 in the book, which explores the ggplot2 package used for data visualisation and exploration. This directory includes images and scripts used to create bar charts, histograms, box plots as well as formatting them in a way to reveal data patterns and relationships, such as creating proportional bar charts, stacked histograms as well as multivariate bar charts in order to gain a better understanding of the dataset.
