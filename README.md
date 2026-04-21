@@ -43,3 +43,7 @@ This directory is associated with Chapter 10 in the book, which introduces addit
 ### Success in Machine Learning
 
 This directory is associated with Chapter 11 in the book, which explores the ggplot2 package used for data visualisation and exploration. This directory includes images and scripts used to create bar charts, histograms, box plots as well as formatting them in a way to reveal data patterns and relationships, such as creating proportional bar charts, stacked histograms as well as multivariate bar charts in order to gain a better understanding of the dataset.
+
+### Advanced Data Preparation
+
+This directory is associated with Chapter 12 in the book, which builds on data preparation and cleaning techniques using the tidyverse package. This package includes tools for selecting, editing, extracting and searching for specific condition in the data to improve the performance of the model. This chapter specifically shows the readr. readxl, dplyr, stringr and lubridate sub-packages, which allows for greater control over data manipulation and preparation over the base R rools and functions.
