@@ -33,3 +33,47 @@ sw_forward$coefficients
 
 #Implementing a backwards regression model for removing the worst variables
 sw_backward <- stats::step(full_model, direction = "backward")
+
+#Using Boruta for feature selection
+
+#Adding a random values feature to the dataset
+set.seed(12345)
+titanic_train$rand_vals <- runif(n = 891, min = 1, max = 100)
+
+#Implementing Boruta to find the most important variables
+library(Boruta)
+titanic_boruta <- Boruta(Survived ~ PassengerId + Age +
+                           Sex + Pclass + SibSp + rand_vals,
+                         data = titanic_train, doTrace = 1)
+
+#Exploring the results of the Boruta model
+titanic_boruta
+
+#Plotting the results of feature selection from Boruta model
+plot(titanic_boruta)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
