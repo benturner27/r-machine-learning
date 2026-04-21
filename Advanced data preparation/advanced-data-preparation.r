@@ -66,13 +66,47 @@ m_titanic <- titanic_train |>
 library(rpart.plot)
 rpart.plot(m_titanic)
 
+#Text transformation
 
+#Determining cabin codes of passengers by class
+library(stringr)
+titanic_train <- titanic_train |>
+  mutate(CabinCode = str_sub(Cabin, start = 1, end = 1))
 
+#Exploring whether CabinCode relationship is meaningful
+table(titanic_train$Pclass, titanic_train$CabinCode, useNA = "ifany")
 
+#Determining whether cabin codes relates to higher survival rates by class
+library(ggplot2)
+titanic_train |> ggplot() +
+  geom_bar(aes(x = CabinCode, y = Survived),
+           stat = "summary", fun = "mean") +
+  ggtitle("Titanic Survival Rate by Cabin Code")
 
+#Creating title feature by matching prefixes to reg ex
+titanic_train <- titanic_train |>
+  mutate(Title = str_extract(Name, ", [A-z]+\\."))
 
+#Replacing and removing the punctuation in the prefixes using reg ex
+titanic_train <- titanic_train |>
+  mutate(Title = str_replace_all(Title, "[, \\.]", ""))
+table(titanic_train$Title)
 
+#Creating TitleGroup feature to simplify the amount of prefixes available
+titanic_train <- titanic_train |>
+  mutate(TitleGroup  = recode(Title,
+    "Mr" = "Mr", "Mrs" = "Mrs", "Master" = "Master",
+    "Miss" = "Miss", "Ms" = "Miss", "Mlle" = "Miss",
+    "Mme" = "Miss", .missing = "Other", .default = "Other"))
 
+#Verifying that TitleGroup has been implemented properly
+table(titanic_train$TitleGroup)
+
+#Determining whether relationship between title and survival rates is meaningful
+titanic_train |> ggplot() +
+  geom_bar(aes(x = TitleGroup, y = Survived),
+           stat = "summary", fun = "mean") +
+  ggtitle("Survival Rates by Title Group")
 
 
 
