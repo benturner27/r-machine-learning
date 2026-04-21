@@ -46,4 +46,4 @@ This directory is associated with Chapter 11 in the book, which explores the ggp
 
 ### Advanced Data Preparation
 
-This directory is associated with Chapter 12 in the book, which builds on data preparation and cleaning techniques using the tidyverse package. This package includes tools for selecting, editing, extracting and searching for specific condition in the data to improve the performance of the model. This chapter specifically shows the readr. readxl, dplyr, stringr and lubridate sub-packages, which allows for greater control over data manipulation and preparation over the base R rools and functions.
+This directory is associated with Chapter 12 in the book, which builds on data preparation and cleaning techniques using the tidyverse package. This package includes tools for selecting, editing, extracting and searching for specific condition in the data to improve the performance of the model. This chapter specifically shows the readr, readxl, dplyr, stringr and lubridate sub-packages, which allows for greater control with data manipulation and preparation over the base R rools and functions.
