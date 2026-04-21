@@ -108,25 +108,52 @@ titanic_train |> ggplot() +
            stat = "summary", fun = "mean") +
   ggtitle("Survival Rates by Title Group")
 
+#Date cleaning
 
+#Example of lubridate's date constructor
+library(lubridate)
+mdy(c("October 25, 2013", "10/25/2013"))
+dmy(c("25 October 2013", "25.10.2013"))
+ymd("2013-10-25")
 
+#Constructing date objects
+MLwR_1stEd <- mdy("October 25, 2013")
+MLwR_2ndEd <- mdy("July 31, 2015")
+MLwR_3rdEd <- mdy("April 15, 2019")
 
+#Computing differences between 2 dates
+MLwR_2ndEd - MLwR_1stEd
+MLwR_3rdEd - MLwR_2ndEd
 
+#Converting the day calculation into seconds
+as.duration(MLwR_2ndEd - MLwR_1stEd)
+as.duration(MLwR_3rdEd - MLwR_2ndEd)
 
+#Converting the as.duration calculation into just years
+dyears()
+as.duration(MLwR_2ndEd - MLwR_1stEd) / dyears()
+as.duration(MLwR_3rdEd - MLwR_2ndEd) / dyears()
 
+#Using time_length function to achieve the same calculation
+time_length(MLwR_2ndEd - MLwR_1stEd, unit = "years")
+time_length(MLwR_3rdEd - MLwR_2ndEd, unit = "years")
 
+#Example of interval function
+USA_DOB <- mdy("July 4, 1776")
+time_length(mdy("July 3, 2023") - USA_DOB, unit = "years")
+time_length(mdy("July 5, 2023") - USA_DOB, unit = "years")
 
+interval(USA_DOB, mdy("July 3, 2023")) / years()
+interval(USA_DOB, mdy("July 5, 2023")) / years()
 
+#Converting the year calculations to an integer
+USA_DOB %--% mdy("July 3, 2023") %/% years()
+USA_DOB %--% mdy("July 5, 2023") %/% years()
 
+#Creating a function automating the calendar time conversion
+age <- function(birthdate) {
+  birthdate %--% today() %/% years()
+}
 
-
-
-
-
-
-
-
-
-
-
-
+#Example using age function
+age(dmy("27/06/2000"))
