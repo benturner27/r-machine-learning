@@ -151,11 +151,43 @@ sns_data_pca <- cbind(sns_data[1:4], sns_pca$x)
 m <- lm(friends ~ PC1 + PC2 + PC3 + PC4 + PC5, data = sns_data_pca)
 m
 
+#Remapping sparse categorical data
 
+#Loading csv into enviroment and examining title feature
+titanic_train <- read_csv("titanic_train.csv") |>
+  mutate(Title = str_extract(Name, ", [A-z]+\\.")) |>
+  mutate(Title = str_replace_all(Title, "[, \\.]", ""))
+table(titanic_train$Title, useNA = "ifany")
 
+#Remapping he prefixes for easier distinction between them
+titanic_train <- titanic_train |>
+  mutate(TitleGroup = fct_collapse(Title,
+    Mr = "Mr",
+    Mrs = "Mrs",
+    Master = "Master",
+    Miss = c("Miss", "Mme", "Mlle", "Ms"),
+    Noble = c("Don", "Sir", "Jonkheer", "Lady"),
+    Military = c("Capt", "Col", "Major"),
+    Doctor = "Dr",
+    Clergy = "Rev",
+    other_level = "Other")
+  ) |>
+  mutate(TitleGroup = fct_na_value_to_level(TitleGroup,
+                                            level = "Unknown"))
+#Examining the TitleGroup feature
+table(titanic_train$TitleGroup)
 
+#Examining the levels in the TitleGroup feature
+fct_count(titanic_train$Title, sort = TRUE, prop = TRUE)
 
+#Simplifying the title groups even further
+table(fct_lump_n(titanic_train$Title, n = 3))
 
+#Simplifying the groups which make up 1% or less of group proportion
+table(fct_lump_prop(titanic_train$Title, prop = 0.01))
+
+#Simplifying the groups with a minimum count of 5 or less
+table(fct_lump_min(titanic_train$Title, min = 5))
 
 
 
