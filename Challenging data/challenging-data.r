@@ -271,9 +271,37 @@ sns_oversampling <- upSample(x = snsdata[2:40],
                              yname = "gender")
 fct_count(sns_oversampling$gender, prop = TRUE)
 
+#Balancing dataset using synthetic generation
 
+#Using themis package's smote function to balance the snsdata gender feature
+library(themis)
+sns_balanced <- snsdata |> smote("gender")
+table(sns_balanced$gender)
 
+#Creating normalisation and unnormalisation functions to reduce biases towards
+#larger numerical features while generating data
+normalise <- function(x) {
+  return((x - min(x)) / (max(x) - min(x)))
+}
 
+unnormalise <- function(norm_vals, col_name) {
+  old_vals <- snsdata[col_name]
+  unnormalised_vals <- norm_vals * (max(old_vals) - min(old_vals)) +
+    min(old_vals)
+  rounded_vals <- if(col_name != "age_imp") {round(unnormalised_vals)} else
+  {unnormalised_vals}
+  return(rounded_vals)
+}
+
+#Applying the two functions in conjunction with smote for balanced values
+snsdata_balanced <- snsdata |>
+  mutate(across(where(is.numeric), normalise)) |>
+  smote("gender") |>
+  mutate(across(where(is.numeric), ~unnormalise(.x, cur_column())))
+
+#comparing the datasets before and after synthetic generation
+table(snsdata$gender)
+table(sns_balanced$gender)
 
 
 
