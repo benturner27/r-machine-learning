@@ -46,4 +46,8 @@ This directory is associated with Chapter 11 in the book, which explores the ggp
 
 ### Advanced Data Preparation
 
-This directory is associated with Chapter 12 in the book, which builds on data preparation and cleaning techniques using the tidyverse package. This package includes tools for selecting, editing, extracting and searching for specific condition in the data to improve the performance of the model. This chapter specifically shows the readr, readxl, dplyr, stringr and lubridate sub-packages, which allows for greater control with data manipulation and preparation over the base R rools and functions.
+This directory is associated with Chapter 12 in the book, which builds on data preparation and cleaning techniques using the tidyverse package. This package includes tools for selecting, editing, extracting and searching for specific condition in the data to improve the performance of the model. This chapter specifically shows the readr, readxl, dplyr, stringr and lubridate sub-packages, which allows for greater control with data manipulation and preparation over the base R tools and functions.
+
+### Challenging Data
+
+This directory is associated with Chapter 13 in the book, which expands on dealing with missing data and imbalanced datasets. They introduce advanced methods, techniques and tools for improving the quality of data for model predictions. These include the boruta package for feature selection, the irlba package for PCA selection, remapping categorical data and numeric data, as well as missing value indicators, rebalancing and synthetically generating data for imbalanced dataset.
