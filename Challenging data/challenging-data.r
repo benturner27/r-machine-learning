@@ -189,6 +189,69 @@ table(fct_lump_prop(titanic_train$Title, prop = 0.01))
 #Simplifying the groups with a minimum count of 5 or less
 table(fct_lump_min(titanic_train$Title, min = 5))
 
+#Binning sparse numeric data
+
+#Exploring the fare value feature in the Titanic dataset
+head(titanic_train$Fare)
+summary(titanic_train$Fare)
+
+#Creating a feature that denotes a first class ticket
+titanic_train <- titanic_train |>
+  mutate(fare_firstclass = if_else(Fare >= 31, 1, 0, missing = 0))
+table(titanic_train$fare_firstclass)
+
+#Using case_when function to create a feature with multiple levels
+titanic_train <- titanic_train |>
+  mutate(fare_class = case_when(
+    Fare >= 31 ~ "1st Class",
+    Fare >= 15 ~ "2nd Class",
+    TRUE ~ "3rd Class"
+  ))
+table(titanic_train$fare_class)
+
+#Using cut function to create divisions in the fare feature
+table(cut(titanic_train$Fare, breaks = c(0, 15, 31, Inf), right = FALSE))
+
+#Creating cuts in fare values in increments of 50
+table(cut(titanic_train$Fare, right = FALSE,
+          breaks = seq(from = 0, to = 550, by = 50)))
+
+#Creating bins for fare values in an attempt to mitigate sparse data
+table(cut(titanic_train$Fare, right = FALSE,
+          breaks = quantile(titanic_train$Fare, probs = seq(0, 1, 0.20))))
+
+#Using ntile function to create equal sized bins for fare value data
+table(ntile(titanic_train$Fare, n = 5))
+
+#Using the above code to create a new feature for fare level
+titanic_train <- titanic_train |>
+  mutate(fare_level = factor(ntile(Fare, n = 11)))
+table(titanic_train$fare_level)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
