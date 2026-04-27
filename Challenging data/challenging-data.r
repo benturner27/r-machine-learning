@@ -228,12 +228,48 @@ titanic_train <- titanic_train |>
   mutate(fare_level = factor(ntile(Fare, n = 11)))
 table(titanic_train$fare_level)
 
+#Imputing missing data
 
+#Using mutate to impute missing data with unknown status
+titanic_train <- titanic_train |>
+  mutate(Cabin = if_else(is.na(Cabin), "X", Cabin),
+         Embarked = if_else(is.na(Embarked), "Unknown", Embarked))
 
+#Missing value indicators (MVIs)
 
+#Creating an MVI for the age feature for exploring whether values are imputed
+titanic_train <- titanic_train |>
+  mutate(Age_MVI = if_else(is.na(Age), 1, 0),
+         Age = if_else(is.na(Age), mean(Age, na.rm = TRUE), Age))
 
+#Rebalancing imbalanced data
 
+#Resampling the sns data set as an example of rebalancing data
+snsdata <- read_csv("snsdata.csv") |>
+  mutate(gender = fct_recode(gender, Female = "F", Male = "M"),
+         gender = fct_na_value_to_level(gender, level = "Unknown"),
+         age = ifelse(age < 13 | age > 20, NA, age)) |>
+  group_by(gradyear) |>
+  mutate(age_imp = if_else(is.na(age), median(age, na.rm = TRUE), age)) |>
+  ungroup() |>
+  select(gender, friends, gradyear, age_imp, basketball:drugs)
 
+#Exploring the refactoring of gender feature
+fct_count(snsdata$gender, prop = TRUE)
+
+#Downsampling the dataset so the gender levels are equal using downSample
+library(caret)
+sns_undersampling <- downSample(x = snsdata[2:40],
+                                y = snsdata$gender,
+                                yname = "gender")
+fct_count(sns_undersampling$gender, prop = TRUE)
+
+#Upsampling the dataset to have the same number of rows as majority class using
+#upSample
+sns_oversampling <- upSample(x = snsdata[2:40],
+                             y = snsdata$gender,
+                             yname = "gender")
+fct_count(sns_oversampling$gender, prop = TRUE)
 
 
 
