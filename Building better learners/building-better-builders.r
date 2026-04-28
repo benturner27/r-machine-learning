@@ -52,14 +52,27 @@ set.seed(300)
 ctrl <- trainControl(method = "cv", number = 10)
 train(default ~ ., data = credit, method = "treebag", trControl = ctrl)
 
-#
+#Boosting 
 
+#Example of using a boosting ensemble with AdaBoost
+library(adabag)
+credit <- read.csv("credit.csv", stringsAsFactors = TRUE)
+set.seed(300)
+m_adaboost <- boosting(default ~ ., data = credit)
+p_adaboost <- predict(m_adaboost, credit)
 
+#Viewing and examining the results of the predictions made by the model
+head(p_adaboost$class)
+p_adaboost$confusion
 
+#Using a 10-fold CV to more accurately evaluate this model's performance
+set.seed(300)
+adaboost_cv <- boosting.cv(default ~ ., data = credit)
+adaboost_cv$confusion
 
-
-
-
+#Retrieving the kappa values from the training model
+library(vcd)
+Kappa(adaboost_cv$confusion)
 
 
 
