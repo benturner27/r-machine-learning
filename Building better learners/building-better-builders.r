@@ -33,3 +33,57 @@ m <- train(default ~ ., data = credit, method = "C5.0",
            trControl = ctrl,
            tuneGrid = grid)
 m
+
+#Ensemble learning
+
+#Using the bootstrap aggregating (bagging) to create an ensemble of decision
+#tree models
+library(ipred)
+credit <- read.csv("credit.csv", stringsAsFactors = TRUE)
+set.seed(123)
+mybag <- bagging(default ~ ., data = credit, nbagg = 25)
+credit_pred <- predict(mybag, credit)
+table(credit_pred, credit$default)
+
+#Running the bagging method on a 10-fold CV fore better real-world performance
+library(caret)
+credit <- read.csv("credit.csv")
+set.seed(300)
+ctrl <- trainControl(method = "cv", number = 10)
+train(default ~ ., data = credit, method = "treebag", trControl = ctrl)
+
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
