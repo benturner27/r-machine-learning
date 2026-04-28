@@ -74,11 +74,26 @@ adaboost_cv$confusion
 library(vcd)
 Kappa(adaboost_cv$confusion)
 
+#Random Forest
 
+#Creating a Random Forest model to train on the credit dataset
+library(randomForest)
+set.seed(300)
+rf <- randomForest(default ~ ., data= credit)
+rf
 
+#Retrieving the kappa value from the trained model
+library(vcd)
+Kappa(rf$confusion[1:2,1:2])
 
+#Creating a Random Forest model using the ranger package
+library(ranger)
+set.seed(300)
+m_ranger <- ranger(default ~ ., data = credit)
+m_ranger
 
-
+#Retrieving the kappa value from the trained model
+Kappa(m_ranger$confusion.matrix)
 
 
 
