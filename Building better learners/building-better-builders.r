@@ -95,14 +95,47 @@ m_ranger
 #Retrieving the kappa value from the trained model
 Kappa(m_ranger$confusion.matrix)
 
+#Gradient boosting
 
+#Creating a gradient boosted model for the credit dataset
+credit <- read.csv("credit.csv", stringsAsFactors = TRUE)
+credit$default <- ifelse(credit$default == "yes", 1, 0)
+set.seed(123)
+train_sample <- sample(1000, 900)
+credit_train <- credit[train_sample, ]
+credit_test <- credit[-train_sample, ]
+library(gbm)
+set.seed(300)
+m_gbm <- gbm(default ~ ., data = credit_train)
+m_gbm
 
+#Running the trained model on the test split, as well as converting the
+#probabilities into classifications
+p_gbm <- predict(m_gbm, credit_test, type = "response")
+p_gbm_c <- ifelse(p_gbm > 0.50, 1, 0)
+table(credit_test$default, p_gbm_c)
 
+#Applying kappa values to the prediction results
+library(vcd)
+Kappa(table(credit_test$default, p_gbm_c))
 
+#Creating a search grid to define the candidate GBM models to find the best one
+grid_gbm <- expand.grid(n.trees = c(100, 150, 200),
+                        interaction.depth = c(1, 2, 3),
+                        shrinkage = c(0.1, 0.2, 0.3),
+                        n.minobsinnode = 10)
 
+#Setting trainControl to select best model from a 10-fold CV
+library(caret)
+ctrl <- trainControl(method = "cv", number = 10, selectionFunction = "best")
 
-
-
+#Determining the best model from the search grid using the control parameters
+credit <- read.csv("credit.csv", stringsAsFactors = TRUE)
+set.seed(300)
+m_gbm_c <- train(default ~ ., data = credit, method = "gbm",
+                 trControl = ctrl, tuneGrid = grid_gbm, metric = "Kappa",
+                 verbose = FALSE)
+m_gbm_c
 
 
 
