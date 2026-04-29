@@ -204,7 +204,8 @@ grid_xgb <- expand.grid(eta = c(0.3, 0.4),
                         min_child_weight = 1)
 
 #Implementing the control and training experiment to find the best tuned model
-#DOES NOT WORK https://github.com/topepo/caret/issues/1412
+#ONLY WORKS WITH XGBOOST VERSIONS 1.7.11.1 AND OLDER
+#https://github.com/topepo/caret/issues/1412
 library(caret)
 ctrl <- trainControl(method = "cv", number = 10, selectionFunction = "best")
 credit <- read.csv("credit.csv", stringsAsFactors = TRUE)
@@ -213,9 +214,6 @@ m_xgb <- train(default ~ ., data = credit, method = "xgbTree",
                trControl = ctrl, tuneGrid = grid_xgb, metric = "Kappa",
                verbosity = 0)
 m_xgb$bestTune
-#According to the book, best tune is: nrounds = 50, max_depth = 3, eta = 0.4,
-#gamma = 1, colsample_bytree = 0.6, min_child_weight = 1
-#subsample figure is unknown, it's not in the book
 
 #Using max function to retrieve the best kappa value from the experiment
 max(m_xgb$results["Kappa"])
