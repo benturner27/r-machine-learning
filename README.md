@@ -51,3 +51,7 @@ This directory is associated with Chapter 12 in the book, which builds on data p
 ### Challenging Data
 
 This directory is associated with Chapter 13 in the book, which expands on dealing with missing data and imbalanced datasets. They introduce advanced methods, techniques and tools for improving the quality of data for model predictions. These include the boruta package for feature selection, the irlba package for PCA selection, remapping categorical data and numeric data, as well as missing value indicators, rebalancing and synthetically generating data for imbalanced dataset.
+
+### Building Better Learners
+
+This directory is associated with Chapter 14 in the book, which deepens the knowledge of building models by introducing ensemble models. These generally include a multiple different learning algorithms and creates a stronger learner. Methods that achieve this can include binning, boosting, Random Forest, gradient boosting for random tree algorithms, as well as stacking and blending for entirely different algorithms. Superparameter tuning also helps increase the model's future performance, by experimenting on multiple models tweaked to find the best one. 
