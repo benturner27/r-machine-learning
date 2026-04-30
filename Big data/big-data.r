@@ -53,3 +53,62 @@ img_prob <- lapply(img_prep, predict, object = model)
 #Decoding the probabilities from the list
 img_classes <- sapply(img_prob, imagenet_decode_predictions, top = 3)
 img_classes
+
+#Understanding word embeddings with word2vec
+
+#Loading library and model. Model was downloaded from
+#www.kaggle.com/datasets/pandey881062/googlenews-vectors-negative300-bin-gz
+library(word2vec)
+m_w2v <- read.word2vec(
+  file = "GoogleNews-vectors-negative300.bin",
+  normalize = TRUE
+  )
+
+#Verifying that the model has been loaded properly
+str(m_w2v)
+
+#Requesting vectors for words associated to a couple terms
+foods <- predict(m_w2v, c("cereal", "bacon", "eggs",
+                          "sandwich", "salad", "steak", "spaghetti"),
+                 type = "embedding")
+meals <- predict(m_w2v, c("breakfast", "lunch", "dinner"),
+                 type = "embedding")
+
+#Examining the results of the predictions
+head(foods["cereal", ])
+foods[, 1:5]
+
+#Exploring relationship between the two predictions made by the model
+word2vec_similarity(foods, meals)
+
+#Using the model on real-world examples, in this case, for advertisements
+user_posts = c(
+  "I eat bacon and eggs in the morning for the most important meal of the day!",
+  "I am going to grab a quick sandwich this afternoon before hitting the gym.",
+  "Can anyone provide restaurant recommendations for my date tonight?"
+)
+
+#Processing user_posts to be used on word2vec model
+library(tm)
+user_posts_clean <- removeWords(user_posts, stopwords())
+user_posts_clean <- txt_clean_word2vec(user_posts_clean)
+
+#Verifying that processing has been impemented properly
+user_posts_clean[1]
+
+#Training word2vec on user_posts to for predictions on meal similarity
+post_vectors <- doc2vec(m_w2v, user_posts_clean)
+
+#Exploring the predictions made by word2vec
+str(post_vectors)
+
+#Exploring the similarity between user_posts_clean and meals vectors
+word2vec_similarity(post_vectors, meals)
+
+
+
+
+
+
+
+
