@@ -185,6 +185,44 @@ con <- dbConnect(
   port = 1234
 )
 
+#Dbplyr as a database backend
+
+#Connecting to SQLite database and converting data into tibble
+library(DBI)
+library(dplyr)
+con <- dbConnect(RSQLite::SQLite(), "credit.sqlite3")
+credit_tbl <- con |>
+  tbl("credit")
+
+#Querying the database and displaying query results 
+library(dplyr)
+credit_tbl |>
+  filter(age >= 45) |>
+  select(age) |>
+  collect() |>
+  summary()
+
+#Retrieving the average loan amount for people aged 45 and over
+credit_tbl |>
+  filter(age >= 45) |>
+  group_by(default) |>
+  summarise(mean_amount = avg(amount))
+
+#Piping the request into show_query function to translate R to SQL query
+credit_tbl |>
+  filter(age >= 45) |>
+  group_by(default) |>
+  summarise(mean_amount = avg(amount)) |>
+  show_query()
+
+
+
+
+
+
+
+
+
 
 
 
