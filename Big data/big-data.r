@@ -105,10 +105,21 @@ str(post_vectors)
 #Exploring the similarity between user_posts_clean and meals vectors
 word2vec_similarity(post_vectors, meals)
 
+#PCA for Big Data and its limitations
 
+#Finding 2 PCA components from the dataset
+library(tidyverse)
+sns_terms <- read_csv("snsdata.csv") |>
+  select(basketball:drugs)
+library(irlba)
+set.seed(123456)
+sns_pca <- sns_terms |>
+  prcomp_irlba(n = 2, center = TRUE, scale = TRUE)
 
-
-
+#Creating a scatterplot to to determine the relationship between the 2 PCAs
+library(ggplot2)
+as.data.frame(sns_pca$x) |>
+  ggplot(aes(PC1, PC2)) + geom_point(size = 1, shape = 1)
 
 
 
