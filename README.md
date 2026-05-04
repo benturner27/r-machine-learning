@@ -55,3 +55,7 @@ This directory is associated with Chapter 13 in the book, which expands on deali
 ### Building Better Learners
 
 This directory is associated with Chapter 14 in the book, which deepens the knowledge of building models by introducing ensemble models. These generally include a multiple different learning algorithms and creates a stronger learner. Methods that achieve this can include binning, boosting, Random Forest, gradient boosting for random tree algorithms, as well as stacking and blending for entirely different algorithms. Superparameter tuning also helps increase the model's future performance, by experimenting on multiple models tweaked to find the best one. 
+
+### Big Data
+
+This directory is associates with Chapter 15 in the book, which explores the world of big learning and deep learning techniques for unstructured datatypes, such as images, audio and text. it explores the TensorFlow package for building and utilising deep learning models for such implementations. There are also introductions to connecting to SQL databases and retrieving data from them using the dbplyr packages as well as parallel computing using the parallel and doParallel packages for faster compute times in machine learning.
