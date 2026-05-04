@@ -155,12 +155,35 @@ sns_sample_tsne |>
   geom_point(size = 2) +
   scale_shape(solid = FALSE)
 
+#Querying data in SQL databases
 
+#Connecting to an SQLite database using dbConnect function
+library(DBI)
+con <- dbConnect(RSQLite::SQLite(), "credit.sqlite3")
 
+#Sending SQL queries to data to retrieve available data
+res <- dbSendQuery(con, "SELECT * FROM credit WHERE age >= 45")
 
+#Fetching result of query to a data frame
+credit_age45 <- dbFetch(res)
+summary(credit_age45$age)
 
+#Closing and disconnecting from database once completed
+dbClearResult(res)
+dbDisconnect(con)
 
+#Connecting to databases using ODBC package
+#ILLUSTRATED USE ONLY
+con <- dbConnect(odbc:odbc(), "my_data_source_name")
 
+con <- dbConnect(
+  odbc:odbc(),
+  database = "my_database",
+  uid = "my_username",
+  pwd = "my_password",
+  host = "my.host.address",
+  port = 1234
+)
 
 
 
