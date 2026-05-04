@@ -121,5 +121,51 @@ library(ggplot2)
 as.data.frame(sns_pca$x) |>
   ggplot(aes(PC1, PC2)) + geom_point(size = 1, shape = 1)
 
+#Using t-SME for big data visualisation
+
+#Preparing data for visualisation
+library(tidyverse)
+set.seed(123)
+sns_sample <- read_csv("snsdata.csv") |>
+  slice_sample(n = 5000)
+
+#Piping sample data into t-SNE algorithm 
+library(Rtsne)
+set.seed(123)
+sns_tsne <- sns_sample |>
+  select(basketball:drugs) |>
+  Rtsne(check_duplicates = FALSE)
+
+#Visualising the t-SNE result onto a scatterplot
+library(ggplot2)
+data.frame(sns_tsne$Y) |>
+  ggplot(aes(X1, X2)) + geom_point(size = 2, sample = 1)
+
+#Determining which clusters have not used any terms in the dataset
+sns_sample_tsne <- sns_sample |>
+  bind_cols(data.frame(sns_tsne$Y)) |>
+  rowwise() |>
+  mutate(n_terms = sum(c_across(basketball:drugs))) |>
+  ungroup() |>
+  mutate(`Terms Used` = if_else(n_terms > 0, "1+", "0"))
+
+#Visualising the result by using a scatterplot
+sns_sample_tsne |>
+  ggplot(aes(X1, X2, shape = `Terms Used`, color = `Terms Used`)) +
+  geom_point(size = 2) +
+  scale_shape(solid = FALSE)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
