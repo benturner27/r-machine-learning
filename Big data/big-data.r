@@ -256,5 +256,39 @@ clusterApply(cl1, c("A", "B", "C", "D"),
 #Terminate the cluster using stopCluster function
 stopCluster(cl1)
 
+#Foreach package for parallel computing in R
+
+#Measuring time for generating 100,000,000 random numbers
+system.time(l1 <- rnorm(100000000))
+
+#Using foreach to split the random generation into four sets
+library(foreach)
+system.time(
+  l4 <- foreach(i = 1:4, .combine = "c")
+  %do% rnorm(25000000)
+)
+detectCores()
+
+#Loading doParallel library to incorporate parallel computing in RNG
+library(doParallel)
+registerDoParallel(cores = 8)
+system.time(
+  l4p <- foreach(i = 1:8, .combine = "c")
+  %dopar% rnorm(12500000)
+)
+stopImplicitCluster()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
