@@ -215,18 +215,46 @@ credit_tbl |>
   summarise(mean_amount = avg(amount)) |>
   show_query()
 
+#Parallel processing
 
+#Using system.time function to measure how long a task takes to complete
+system.time(rnorm(1000000))
 
+#Using detect_cores function to determine how many cores a CPU has
+library(parallel)
+detectCores()
 
+#Experimenting with multicore to see the differences between working with
+#1, 2, 4 and 8 cores
+system.time(
+  l1 <- unlist(mclapply(1:10,
+                        function(x) {rnorm(10000000)},
+                        mc.cores = 1)))
+system.time(
+  l1 <- unlist(mclapply(1:10,
+                        function(x) {rnorm(10000000)},
+                        mc.cores = 2)))
+system.time(
+  l1 <- unlist(mclapply(1:10,
+                        function(x) {rnorm(10000000)},
+                        mc.cores = 4)))
+system.time(
+  l1 <- unlist(mclapply(1:10,
+                        function(x) {rnorm(10000000)},
+                        mc.cores = 8)))
 
+#Setting up a cluster of multicore machines using the snow package
+cl1 <- makeCluster(4)
 
+#Executing a function on all machines in the cluster
+clusterCall(cl1, function() {Sys.info()["nodename"]})
 
+#Executing different commands on each node by using clusterApply function
+clusterApply(cl1, c("A", "B", "C", "D"),
+             function(x) {paste("Cluster", x, "ready!")})
 
-
-
-
-
-
+#Terminate the cluster using stopCluster function
+stopCluster(cl1)
 
 
 
